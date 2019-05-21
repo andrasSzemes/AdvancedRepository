@@ -1,18 +1,31 @@
-create table Custom_tag
+drop table if exists category_tag;
+drop table if exists custom_tag;
+drop table if exists favorite_shop;
+drop table if exists group_account;
+drop table if exists line_item;
+drop table if exists list_line_items;
+drop table if exists member;
+drop table if exists member_groups;
+drop table if exists product;
+drop table if exists products_custom_tags;
+drop table if exists saved_products;
+drop table if exists shopping_list;
+
+create table custom_tag
 (
   id serial,
   name varchar
 );
 
 
-create table Category_tag
+create table category_tag
 (
   id serial,
   name varchar
 );
 
 
-create table Product
+create table product
 (
   id serial,
   name varchar,
@@ -21,14 +34,14 @@ create table Product
 );
 
 
-create table Products_custom_tags
+create table products_custom_tags
 (
   product_id int,
   custom_tag_id int
 );
 
 
-create table Group_account
+create table group_account
 (
   id serial,
   name varchar,
@@ -36,14 +49,14 @@ create table Group_account
 );
 
 
-create table Saved_products
+create table saved_products
 (
   product_id int,
   group_id int
 );
 
 
-create table Member
+create table member
 (
   id serial,
   name varchar,
@@ -53,14 +66,14 @@ create table Member
 );
 
 
-create table Member_groups
+create table member_groups
 (
   group_id int,
   member_id int
 );
 
 
-create table Shopping_list
+create table shopping_list
 (
   id serial,
   associated_shop_id int,
@@ -70,7 +83,7 @@ create table Shopping_list
 );
 
 
-create table Line_item
+create table line_item
 (
   id serial,
   quantity varchar,
@@ -79,14 +92,14 @@ create table Line_item
 );
 
 
-create table List_line_items
+create table list_line_items
 (
   shopping_list_id int,
   line_item_id int
 );
 
 
-create table Favorite_shop
+create table favorite_shop
 (
   id serial,
   name varchar,
