@@ -18,4 +18,6 @@ public interface ProductDao {
 
     List<Product> getBy(String category);
 
+    void addPicture(int id, String url);
+
 }

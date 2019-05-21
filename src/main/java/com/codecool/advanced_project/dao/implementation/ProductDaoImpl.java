@@ -110,6 +110,18 @@ public class ProductDaoImpl implements ProductDao {
         return null;
     }
 
+    @Override
+    public void addPicture(int id, String url) {
+        try (
+                Connection conn = getConnection();
+                PreparedStatement stmt = conn.prepareStatement("INSERT INTO product (picture_url) values (?)")
+        ) {
+            stmt.setString(1, url);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private Product getProduct(ResultSet resultSet) throws SQLException {
         return new Product(resultSet.getString("name"), productCategoryDao.find(resultSet.getInt("categoryid")));
