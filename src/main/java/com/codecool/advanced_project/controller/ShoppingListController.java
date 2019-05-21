@@ -15,8 +15,8 @@ public class ShoppingListController {
     private ShoppingListDao shoppingListDao;
 
     @Autowired
-    public ShoppingListController(ShoppingListDao ShoppingListDaoDb) {
-        this.shoppingListDao = ShoppingListDaoDb;
+    public ShoppingListController(ShoppingListDao ShoppingListDaoInUse) {
+        this.shoppingListDao = ShoppingListDaoInUse;
     }
 
     @GetMapping("/latest/{userId}")

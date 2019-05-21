@@ -12,52 +12,33 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 @Component
 public class ShoppingListDaoDb implements ShoppingListDao {
-    private JdbcTemplate jdbcTemplate;
-
     @Autowired
-    public ShoppingListDaoDb(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private Function<Integer, List<LineItem>> getAllLineItem;
+    @Autowired
+    private Function<Integer, List<Integer>> getGroupIds;
 
     @Override
     public ShoppingList getLatest(int userId) {
 
-        List<Integer> groupIds = getGroupIds(userId);
+        List<Integer> groupIds = getGroupIds.apply(userId);
+        List<Integer> queryParams = getQueryParams(userId, groupIds);
 
         String query = buildQuery(groupIds.size());
-        List<Integer> queryParams = getQueryParams(userId, groupIds);
         ShoppingList shoppingList = executeQuery(query, queryParams.toArray());
 
         if (shoppingList != null) {
-            List<LineItem> lineItems = getLineItems(shoppingList);
+            List<LineItem> lineItems = getAllLineItem.apply(shoppingList.getId());
             shoppingList.setLineItems(lineItems);
         }
 
         return shoppingList;
-    }
-
-    private List<LineItem> getLineItems(ShoppingList shoppingList) {
-        List<LineItem> lineItems = new ArrayList<>();
-
-        String query = "SELECT * FROM line_item " +
-                "LEFT JOIN list_line_items ON(line_item.id = list_line_items.line_item_id) " +
-                "WHERE list_line_items.shopping_list_id=" +
-                shoppingList.getId();
-
-        List<Map<String, Object>> queryRows = jdbcTemplate.queryForList(query);
-
-        for (Map<String, Object> queryRow : queryRows) {
-            LineItem lineItem = new LineItem();
-            lineItem.setId((Integer) queryRow.get("id"));
-            lineItem.setQuantity((String) queryRow.get("quantity"));
-            lineItem.setArchived((Boolean) queryRow.get("archived"));
-            lineItem.setProductId((Integer) queryRow.get("product_id"));
-            lineItems.add(lineItem);
-        }
-        return lineItems;
     }
 
     private ShoppingList executeQuery(String query, Object[] params) {
@@ -90,15 +71,5 @@ public class ShoppingListDaoDb implements ShoppingListDao {
         queryBuilder.append(" ORDER BY id DESC LIMIT 1;");
         query = queryBuilder.toString();
         return query;
-    }
-
-    private List<Integer> getGroupIds(int userId) {
-        String query = "SELECT group_id FROM member_groups WHERE member_id=?";
-        List<Integer> groupIds = new ArrayList<>();
-        List<Map<String, Object>> queryRows = jdbcTemplate.queryForList(query, userId);
-        for (Map<String, Object> queryRow : queryRows) {
-            groupIds.add((Integer) queryRow.get("group_id"));
-        }
-        return groupIds;
     }
 }
