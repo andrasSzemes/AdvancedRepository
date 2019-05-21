@@ -1,6 +1,7 @@
 package com.codecool.advanced_project.service.dao.implementation;
 
 import com.codecool.advanced_project.model.Product;
+import com.codecool.advanced_project.model.ProductCategory;
 import com.codecool.advanced_project.service.dao.MemberGroupsDao;
 import com.codecool.advanced_project.service.dao.ProductDao;
 import org.junit.jupiter.api.BeforeAll;
@@ -33,7 +34,8 @@ class ProductDaoDbTest {
 
     @Test
     void getProductWithValidId() {
-        Product product = new Product(1, "product", 1, "picture");
+        ProductCategory category = new ProductCategory("category");
+        Product product = new Product(1, "product", category, "picture");
         when(jdbcTemplateMock.queryForObject(anyString(), any(Object[].class), any(RowMapper.class))).thenReturn(product);
 
         assertEquals(product, productDao.find(1));
