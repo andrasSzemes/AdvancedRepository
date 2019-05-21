@@ -19,4 +19,67 @@ public class ShoppingList {
         this.lineItems = lineItems;
     }
 
+    public ShoppingList() {
+
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getAssociatedShopId() {
+        return associatedShopId;
+    }
+
+    public void setAssociatedShopId(int associatedShopId) {
+        this.associatedShopId = associatedShopId;
+    }
+
+    public boolean isArchived() {
+        return isArchived;
+    }
+
+    public void setArchived(boolean archived) {
+        isArchived = archived;
+    }
+
+    public int getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
+
+    public List<LineItem> getLineItems() {
+        return lineItems;
+    }
+
+    public void setLineItems(List<LineItem> lineItems) {
+        this.lineItems = lineItems;
+    }
+
+    @Override
+    public String toString() {
+        return "ShoppingList{" +
+                "id=" + id +
+                ", associatedShopId=" + associatedShopId +
+                ", isArchived=" + isArchived +
+                ", memberId=" + memberId +
+                ", groupId=" + groupId +
+                ", lineItems=" + lineItems +
+                '}';
+    }
 }
