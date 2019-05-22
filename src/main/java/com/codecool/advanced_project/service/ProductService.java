@@ -20,9 +20,6 @@ public class ProductService {
     public Product findById(int id) {
         return productDao.find(id);
     }
-    public String printStg() {
-        return "Print something";
-    }
 
     public void add(Product newProduct) {
         productDao.add(newProduct);

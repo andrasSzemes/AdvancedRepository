@@ -20,11 +20,6 @@ public class ProductController {
         return this.productService.findById(id);
     }
 
-    @GetMapping("/print")
-    public String printSomething() {
-        return this.productService.printStg();
-    }
-
     @PostMapping("/add")
     public Product addProduct(@RequestBody @Valid Product newProduct) {
         this.productService.add(newProduct);

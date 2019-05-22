@@ -4,11 +4,13 @@ import com.codecool.advanced_project.dao.ProductCategoryDao;
 import com.codecool.advanced_project.model.ProductCategory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ProductCategoryImpl implements ProductCategoryDao {
 
     private static ProductCategoryImpl instance;
