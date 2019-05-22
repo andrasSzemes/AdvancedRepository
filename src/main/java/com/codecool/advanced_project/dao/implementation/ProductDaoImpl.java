@@ -49,9 +49,9 @@ public class ProductDaoImpl implements ProductDao {
         try (
                 Connection conn = getConnection();
                 PreparedStatement stmt = conn.prepareStatement(
-                        "select product.name, product.category_tag_id as categoryid" +
-                                " from product join category_tag on product.category_tag_id = category_tag.id " +
-                                " where product.id = (?)")
+                        "SELECT product.name, product.category_tag_id as categoryid" +
+                                " FROM product JOIN category_tag ON product.category_tag_id = category_tag.id " +
+                                " WHERE product.id = (?)")
         ) {
             stmt.setInt(1, id);
 
@@ -64,6 +64,7 @@ public class ProductDaoImpl implements ProductDao {
             logger.error("ProductDao/find: " + e.getMessage());
 
         }
+        logger.info("fails here");
         return null;
     }
 
@@ -98,7 +99,7 @@ public class ProductDaoImpl implements ProductDao {
 
         try (
                 Connection conn = getConnection();
-                PreparedStatement stmt = conn.prepareStatement("SELECT * FROM product")
+                PreparedStatement stmt = conn.prepareStatement("SELECT product.name, product.category_tag_id as categoryid FROM product")
         ) {
             ResultSet resultSet = stmt.executeQuery();
             while (resultSet.next()) {
