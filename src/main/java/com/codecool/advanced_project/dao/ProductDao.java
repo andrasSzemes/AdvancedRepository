@@ -20,4 +20,8 @@ public interface ProductDao {
 
     void addPicture(int id, String url);
 
+    void rename(int id, String newName);
+
+    void updateTags(int id, List<String> tags);
+
 }

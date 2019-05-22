@@ -32,15 +32,26 @@ public class ProductDaoImpl implements ProductDao {
     public void add(Product product) {
         try (
                 Connection conn = getConnection();
+                PreparedStatement stmt = conn.prepareStatement("INSERT INTO product (name) values (?)")
 
-                PreparedStatement stmt = conn.prepareStatement("INSERT INTO product (name, category_tag_id) values (?, ?)")
         ) {
             stmt.setString(1, product.getName());
-            stmt.setString(2, product.getCategory().getName());
+            stmt.executeQuery();
 
-            stmt.executeUpdate();
         } catch (Exception e) {
             logger.error("ProductDao/add: " + e.toString());
+        }
+        try (
+                Connection conn = getConnection();
+                PreparedStatement stmt = conn.prepareStatement("SELECT id FROM product WHERE name=(?)")
+        ) {
+            stmt.setString(1, product.getName());
+            ResultSet resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                product.setId(resultSet.getInt("id"));
+            }
+        } catch (SQLException e) {
+            logger.error("ProductDao/add(getID): " + e.toString());
         }
     }
 
@@ -130,9 +141,27 @@ public class ProductDaoImpl implements ProductDao {
         }
     }
 
+    @Override
+    public void rename(int id, String newName) {
+        try (
+                Connection conn = getConnection();
+                PreparedStatement stmt = conn.prepareStatement("UPDATE  product SET name = (?) WHERE id = (?)")
+        ) {
+            stmt.setString(1, newName);
+            stmt.setInt(2, id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            logger.error("ProductDao/rename: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void updateTags(int id, List<String> tags) {
+
+    }
 
     private Product getProduct(ResultSet resultSet) throws SQLException {
-        return new Product(resultSet.getString("name"), productCategoryDao.find(resultSet.getInt("categoryid")));
+        return new Product(resultSet.getString("name"), productCategoryDao.findById(resultSet.getInt("categoryid")));
     }
 
     private Connection getConnection() throws SQLException {

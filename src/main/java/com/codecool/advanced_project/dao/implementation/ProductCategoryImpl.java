@@ -13,8 +13,11 @@ import java.util.List;
 @Component
 public class ProductCategoryImpl implements ProductCategoryDao {
 
-    private static ProductCategoryImpl instance;
+    private static ProductCategoryImpl instance = null;
     private static final Logger logger = LoggerFactory.getLogger(ProductCategoryImpl.class);
+
+    private ProductCategoryImpl() {
+    }
 
     public static ProductCategoryImpl getInstance() {
         if (instance == null) {
@@ -23,18 +26,35 @@ public class ProductCategoryImpl implements ProductCategoryDao {
         return instance;
     }
 
+
     @Override
     public void add(ProductCategory category) {
         try (
                 Connection conn = getConnection();
 
-                PreparedStatement stmt = conn.prepareStatement("INSERT INTO category_tag (name) values (?)")
+                PreparedStatement stmt = conn.prepareStatement("INSERT INTO category_tag (name) values (?) RETURNING id")
         ) {
             stmt.setString(1, category.getName());
 
-            stmt.executeUpdate();
+            ResultSet resultSet = stmt.executeQuery();
+
+            category.setId(resultSet.getInt("id"));
+
         } catch (Exception e) {
             logger.error("ProductCategoryDao/add: " + e.getMessage());
+        }
+        try (
+                Connection conn = getConnection();
+
+                PreparedStatement stmt = conn.prepareStatement("SELECT id FROM category_tag WHERE name = (?)")
+                ) {
+                    stmt.setString(1, category.getName());
+                    ResultSet resultSet = stmt.executeQuery();
+                    if (resultSet.next()) {
+                        category.setId(resultSet.getInt("id"));
+                    }
+        } catch (SQLException e) {
+            logger.error("ProductCategoryDao/add(getID): " + e.getMessage());
         }
     }
 

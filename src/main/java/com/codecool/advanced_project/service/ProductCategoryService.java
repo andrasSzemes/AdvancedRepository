@@ -5,7 +5,6 @@ import com.codecool.advanced_project.model.ProductCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -20,10 +19,6 @@ public class ProductCategoryService {
 
     public ProductCategory findById(int id) {
         return productCategoryDao.findById(id);
-    }
-
-    public ProductCategory findByName(String name) {
-        return productCategoryDao.findByName(name);
     }
 
     public void add(ProductCategory newProductCategory) {
