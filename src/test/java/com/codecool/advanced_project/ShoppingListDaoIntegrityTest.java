@@ -1,6 +1,9 @@
-package com.codecool.advanced_project.dao;
+package com.codecool.advanced_project;
 
+import com.codecool.advanced_project.config.JdbcConfig;
 import com.codecool.advanced_project.model.ShoppingList;
+import com.codecool.advanced_project.service.ShoppingListDao;
+import com.codecool.advanced_project.service.dao.implementation.ShoppingListDaoDb;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,12 +15,12 @@ import javax.sql.DataSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ShoppingListDaoTest {
+class ShoppingListDaoIntegrityTest {
 
-    private SpringJdbcConfig springJdbcConfig = new SpringJdbcConfig();
-    private DataSource dataSource = springJdbcConfig.postgresqlDataSource();
-    private ShoppingListDao shoppingListDao = new ShoppingListDao(dataSource);
+    private JdbcConfig jdbcConfig = new JdbcConfig();
+    private DataSource dataSource = jdbcConfig.postgresqlDataSource();
     private JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+    private ShoppingListDao shoppingListDao = new ShoppingListDaoDb(jdbcTemplate);
 
     private String shopListTable = "shopping_list";
 
@@ -31,7 +34,7 @@ class ShoppingListDaoTest {
         ShoppingList shoppingList = new ShoppingList(1234);
 
         for (int i=1; i<7; i++) {
-            shoppingListDao.saveNewShoppingList(shoppingList);
+            shoppingListDao.saveNew(shoppingList);
             assertEquals(i, getNumberOfRowsInTable(shopListTable));
         }
     }
@@ -41,13 +44,13 @@ class ShoppingListDaoTest {
     void testSaveNewShoppingListWritesCorrectGroupId(int groupId) {
         ShoppingList shoppingList = new ShoppingList(groupId);
 
-        shoppingListDao.saveNewShoppingList(shoppingList);
+        shoppingListDao.saveNew(shoppingList);
         assertEquals(groupId, getLastInsertedListsGroupId());
     }
 
     @AfterAll
     static void clearAfterTests() {
-        new ShoppingListDaoTest().truncateShoppingListTable();
+        new ShoppingListDaoIntegrityTest().truncateShoppingListTable();
     }
 
     private int getLastInsertedListsGroupId() {
