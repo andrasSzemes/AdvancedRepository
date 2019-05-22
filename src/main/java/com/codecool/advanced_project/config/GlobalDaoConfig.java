@@ -2,9 +2,11 @@ package com.codecool.advanced_project.config;
 
 import com.codecool.advanced_project.service.dao.LineItemDao;
 import com.codecool.advanced_project.service.dao.MemberGroupsDao;
+import com.codecool.advanced_project.service.dao.ProductDao;
 import com.codecool.advanced_project.service.dao.ShoppingListDao;
 import com.codecool.advanced_project.service.dao.implementation.LineItemDaoDb;
 import com.codecool.advanced_project.service.dao.implementation.MemberGroupsDaoDb;
+import com.codecool.advanced_project.service.dao.implementation.ProductDaoDb;
 import com.codecool.advanced_project.service.dao.implementation.ShoppingListDaoDb;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,5 +27,10 @@ public class GlobalDaoConfig {
     @Bean(name = "MemberGroupsDaoInUse")
     public MemberGroupsDao getMemberGroupsDaoImplementation() {
         return new MemberGroupsDaoDb();
+    }
+
+    @Bean(name = "ProductDaoInUse")
+    public ProductDao getProductDaoImplementation() {
+        return new ProductDaoDb();
     }
 }

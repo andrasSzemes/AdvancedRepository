@@ -1,6 +1,7 @@
 package com.codecool.advanced_project.service.dao.implementation;
 
 import com.codecool.advanced_project.model.LineItem;
+import com.codecool.advanced_project.model.Product;
 import com.codecool.advanced_project.service.dao.LineItemDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -8,10 +9,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 public class LineItemDaoDb implements LineItemDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private Function<Integer, Product> getProduct;
 
     @Override
     public List<LineItem> getAll(int shoppingListId) {
@@ -29,7 +33,8 @@ public class LineItemDaoDb implements LineItemDao {
             lineItem.setId((Integer) queryRow.get("id"));
             lineItem.setQuantity((String) queryRow.get("quantity"));
             lineItem.setArchived((Boolean) queryRow.get("archived"));
-            lineItem.setProductId((Integer) queryRow.get("product_id"));
+            int productId = (Integer) queryRow.get("product_id");
+            lineItem.setProduct(getProduct.apply(productId));
             lineItems.add(lineItem);
         }
         return lineItems;

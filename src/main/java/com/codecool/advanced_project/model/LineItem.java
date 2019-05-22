@@ -4,27 +4,17 @@ public class LineItem {
     private int id;
     private String quantity;
     private boolean isArchived;
-    private int productId;
+    private Product product;
 
-    public LineItem(int id, String quantity, boolean isArchived, int productId) {
+    public LineItem(int id, String quantity, boolean isArchived, Product product) {
         this.id = id;
         this.quantity = quantity;
         this.isArchived = isArchived;
-        this.productId = productId;
+        this.product = product;
     }
 
     public LineItem() {
 
-    }
-
-    @Override
-    public String toString() {
-        return "LineItem{" +
-                "id=" + id +
-                ", quantity='" + quantity + '\'' +
-                ", isArchived=" + isArchived +
-                ", productId=" + productId +
-                '}';
     }
 
     public int getId() {
@@ -51,11 +41,11 @@ public class LineItem {
         isArchived = archived;
     }
 
-    public int getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }
