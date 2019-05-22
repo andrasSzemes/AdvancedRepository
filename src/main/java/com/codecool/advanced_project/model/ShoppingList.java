@@ -1,6 +1,7 @@
 package com.codecool.advanced_project.model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ShoppingList {
     private int id;
@@ -81,5 +82,23 @@ public class ShoppingList {
                 ", groupId=" + groupId +
                 ", lineItems=" + lineItems +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ShoppingList that = (ShoppingList) o;
+        return id == that.id &&
+                associatedShopId == that.associatedShopId &&
+                isArchived == that.isArchived &&
+                memberId == that.memberId &&
+                groupId == that.groupId &&
+                Objects.equals(lineItems, that.lineItems);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, associatedShopId, isArchived, memberId, groupId, lineItems);
     }
 }

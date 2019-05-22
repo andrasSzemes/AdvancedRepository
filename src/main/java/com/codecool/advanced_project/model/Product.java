@@ -1,5 +1,7 @@
 package com.codecool.advanced_project.model;
 
+import java.util.Objects;
+
 public class Product {
     private int id;
     private String name;
@@ -46,5 +48,21 @@ public class Product {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return id == product.id &&
+                productCategoryTagId == product.productCategoryTagId &&
+                Objects.equals(name, product.name) &&
+                Objects.equals(picture, product.picture);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, productCategoryTagId, picture);
     }
 }
