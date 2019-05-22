@@ -12,10 +12,14 @@ import java.util.Map;
 import java.util.function.Function;
 
 public class LineItemDaoDb implements LineItemDao {
-    @Autowired
     private JdbcTemplate jdbcTemplate;
-    @Autowired
     private Function<Integer, Product> getProduct;
+
+    @Autowired
+    public LineItemDaoDb(JdbcTemplate jdbcTemplate, Function<Integer, Product> getProduct) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.getProduct = getProduct;
+    }
 
     @Override
     public List<LineItem> getAll(int shoppingListId) {

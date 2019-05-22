@@ -17,12 +17,16 @@ import java.util.function.Supplier;
 
 @Component
 public class ShoppingListDaoDb implements ShoppingListDao {
-    @Autowired
     private JdbcTemplate jdbcTemplate;
-    @Autowired
     private Function<Integer, List<LineItem>> getAllLineItem;
-    @Autowired
     private Function<Integer, List<Integer>> getGroupIds;
+
+    @Autowired
+    public ShoppingListDaoDb(JdbcTemplate jdbcTemplate, Function<Integer, List<LineItem>> getAllLineItem, Function<Integer, List<Integer>> getGroupIds) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.getAllLineItem = getAllLineItem;
+        this.getGroupIds = getGroupIds;
+    }
 
     @Override
     public ShoppingList getLatest(int userId) {

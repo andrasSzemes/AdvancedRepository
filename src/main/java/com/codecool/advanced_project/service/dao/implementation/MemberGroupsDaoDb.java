@@ -9,8 +9,12 @@ import java.util.List;
 import java.util.Map;
 
 public class MemberGroupsDaoDb implements MemberGroupsDao {
-    @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public MemberGroupsDaoDb(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public List<Integer> getGroupIds(int userId) {

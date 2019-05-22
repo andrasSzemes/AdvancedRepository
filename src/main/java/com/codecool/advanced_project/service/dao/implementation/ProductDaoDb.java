@@ -8,8 +8,13 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class ProductDaoDb implements ProductDao {
-    @Autowired
+
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public ProductDaoDb(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public Product find(int id) {
