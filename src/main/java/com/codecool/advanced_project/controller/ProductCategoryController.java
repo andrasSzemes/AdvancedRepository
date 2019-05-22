@@ -9,25 +9,25 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product-categories")
+@RequestMapping("/product-category")
 public class ProductCategoryController {
 
     @Autowired
     private ProductCategoryService productCategoryService;
 
     @GetMapping("/find/{id}")
-    public ProductCategory findProduct(@PathVariable("id") int id) {
+    public ProductCategory findProductCategory(@PathVariable("id") int id) {
         return this.productCategoryService.findById(id);
     }
 
     @PostMapping("/add")
-    public ProductCategory addProduct(@RequestBody @Valid ProductCategory newProductCategory) {
+    public ProductCategory addProductCategory(@RequestBody @Valid ProductCategory newProductCategory) {
         this.productCategoryService.add(newProductCategory);
         return newProductCategory;
     }
 
     @GetMapping("/list/all")
-    public List<ProductCategory> listProducts() {
+    public List<ProductCategory> listProductCategories() {
         return this.productCategoryService.getAll();
     }
 }

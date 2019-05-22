@@ -1,5 +1,6 @@
 package com.codecool.advanced_project.model;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -7,6 +8,7 @@ import java.util.Objects;
 public class Product {
     private int id;
     private String name;
+    private int id;
     private ProductCategory category;
     private String picture;
     private List<String> tags = new ArrayList<>();
@@ -81,5 +83,13 @@ public class Product {
 
     public void setTags(List<String> tags) {
         this.tags = tags;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 }
