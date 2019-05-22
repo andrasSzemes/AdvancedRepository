@@ -5,6 +5,8 @@ import com.codecool.advanced_project.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class ProductService {
 
@@ -24,5 +26,9 @@ public class ProductService {
 
     public void add(Product newProduct) {
         productDao.add(newProduct);
+    }
+
+    public List<Product> getAll() {
+        return productDao.getAll();
     }
 }

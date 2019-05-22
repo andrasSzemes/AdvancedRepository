@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/product")
@@ -25,7 +26,13 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public void addProduct(@RequestBody @Valid Product newProduct) {
+    public Product addProduct(@RequestBody @Valid Product newProduct) {
         this.productService.add(newProduct);
+        return newProduct;
+    }
+
+    @GetMapping("/list/all")
+    public List<Product> listProducts() {
+        return this.productService.getAll();
     }
 }
