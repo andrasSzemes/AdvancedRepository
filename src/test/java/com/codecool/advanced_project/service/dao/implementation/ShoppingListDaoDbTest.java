@@ -21,7 +21,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class ShoppingListDaoDbTest {
-    private static ShoppingListDao shoppingListDaoMock;
+    private static ShoppingListDao shoppingListDao;
     private static JdbcTemplate jdbcTemplateMock;
     private static LineItemDao lineItemDaoMock;
     private static MemberGroupsDao memberGroupsDaoMock;
@@ -33,7 +33,7 @@ class ShoppingListDaoDbTest {
         jdbcTemplateMock = mock(JdbcTemplate.class);
         lineItemDaoMock = mock(LineItemDaoDb.class);
         memberGroupsDaoMock = mock(MemberGroupsDaoDb.class);
-        shoppingListDaoMock = new ShoppingListDaoDb(jdbcTemplateMock, lineItemDaoMock::getAll, memberGroupsDaoMock::getGroupIds);
+        shoppingListDao = new ShoppingListDaoDb(jdbcTemplateMock, lineItemDaoMock::getAll, memberGroupsDaoMock::getGroupIds);
     }
 
     @BeforeEach
@@ -59,7 +59,7 @@ class ShoppingListDaoDbTest {
         when(memberGroupsDaoMock.getGroupIds(anyInt())).thenReturn(new ArrayList<>());
         when(jdbcTemplateMock.queryForObject(anyString(), any(Object[].class), any(RowMapper.class))).thenThrow(EmptyResultDataAccessException.class);
 
-        assertNull(shoppingListDaoMock.getLatest(1));
+        assertNull(shoppingListDao.getLatest(1));
     }
 
     @Test
@@ -69,7 +69,7 @@ class ShoppingListDaoDbTest {
         when(jdbcTemplateMock.queryForObject(anyString(), any(Object[].class), any(RowMapper.class))).thenReturn(shoppingList);
         expectedShoppingList.setLineItems(new ArrayList<>());
 
-        assertEquals(expectedShoppingList, shoppingListDaoMock.getLatest(1));
+        assertEquals(expectedShoppingList, shoppingListDao.getLatest(1));
     }
 
     @Test
@@ -80,7 +80,7 @@ class ShoppingListDaoDbTest {
         when(jdbcTemplateMock.queryForObject(anyString(), any(Object[].class), any(RowMapper.class))).thenReturn(shoppingList);
         expectedShoppingList.setLineItems(new ArrayList<>());
 
-        assertEquals(expectedShoppingList, shoppingListDaoMock.getLatest(1));
+        assertEquals(expectedShoppingList, shoppingListDao.getLatest(1));
     }
 
 }
