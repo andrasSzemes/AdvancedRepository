@@ -19,7 +19,11 @@ public class ProductCategoryService {
     }
 
     public ProductCategory findById(int id) {
-        return productCategoryDao.find(id);
+        return productCategoryDao.findById(id);
+    }
+
+    public ProductCategory findByName(String name) {
+        return productCategoryDao.findByName(name);
     }
 
     public void add(ProductCategory newProductCategory) {

@@ -39,7 +39,7 @@ public class ProductCategoryImpl implements ProductCategoryDao {
     }
 
     @Override
-    public ProductCategory find(int id) {
+    public ProductCategory findById(int id) {
         try (
                 Connection conn = getConnection();
                 PreparedStatement stmt = conn.prepareStatement("SELECT * FROM category_tag WHERE id = (?)")
@@ -47,15 +47,30 @@ public class ProductCategoryImpl implements ProductCategoryDao {
             stmt.setInt(1, id);
 
             ResultSet resultSet = stmt.executeQuery();
-            if (resultSet.next()) {
-                return new ProductCategory(resultSet.getString("name"));
-            }
+            return new ProductCategory(resultSet.getString("name"));
 
         } catch (Exception e) {
             logger.error("ProductCategoryDao/find: " + e.getMessage());
         }
         return null;
     }
+
+    @Override
+    public ProductCategory findByName(String name) {
+        try (
+                Connection conn = getConnection();
+                PreparedStatement stmt = conn.prepareStatement("SELECT * FROM  category_tag WHERE name = (?)")
+        ) {
+            stmt.setString(1, name);
+
+            ResultSet resultSet = stmt.executeQuery();
+            return new ProductCategory(resultSet.getString("id"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     @Override
     public void remove(int id) {
