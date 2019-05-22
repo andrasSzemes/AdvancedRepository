@@ -7,7 +7,7 @@ import java.util.List;
 public interface ProductCategoryDao {
 
     void add(ProductCategory category);
-    ProductCategory find(int id);
+    ProductCategory findByName(String name);
     void remove(int id);
 
     List<ProductCategory> getAll();
@@ -15,4 +15,5 @@ public interface ProductCategoryDao {
 
     Integer getId(String name);
 
+    ProductCategory findById(int id);
 }
