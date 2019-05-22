@@ -9,7 +9,11 @@ public class Product {
     private ProductCategory category;
     private List<String> tags = new ArrayList<>();
 
-    public Product (String name, ProductCategory category) {
+    public Product() {
+
+    }
+
+    public Product(String name, ProductCategory category) {
         this.name = name;
         this.category = category;
     }
