@@ -3,15 +3,20 @@ package com.codecool.advanced_project.dao.implementation;
 import com.codecool.advanced_project.dao.ProductCategoryDao;
 import com.codecool.advanced_project.dao.ProductDao;
 import com.codecool.advanced_project.model.Product;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ProductDaoImpl implements ProductDao {
     private List<Product> data = new ArrayList<>();
     private static ProductDaoImpl instance = null;
     private ProductCategoryDao productCategoryDao = ProductCategoryImpl.getInstance();
+    private static final Logger logger = LoggerFactory.getLogger(ProductCategoryImpl.class);
 
     private ProductDaoImpl() {
     }
@@ -35,12 +40,12 @@ public class ProductDaoImpl implements ProductDao {
 
             stmt.executeUpdate();
         } catch (Exception e) {
-            System.out.println("sqlerror" + e);
+            logger.error("ProductDao/add: " + e.toString());
         }
     }
 
     @Override
-    public Product find(int id) {
+    public Product find(int id) throws NullPointerException {
         try (
                 Connection conn = getConnection();
                 PreparedStatement stmt = conn.prepareStatement(
@@ -56,7 +61,8 @@ public class ProductDaoImpl implements ProductDao {
             }
 
         } catch (Exception e) {
-            System.out.println("sqlerror" + e);
+            logger.error("ProductDao/find: " + e.getMessage());
+
         }
         return null;
     }
@@ -70,7 +76,7 @@ public class ProductDaoImpl implements ProductDao {
             stmt.setInt(1, id);
             stmt.executeUpdate();
         } catch (Exception e) {
-            System.out.println("sqlerror" + e);
+            logger.error("ProductDao/remove: " + e.getMessage());
         }
     }
 
@@ -82,7 +88,7 @@ public class ProductDaoImpl implements ProductDao {
         ) {
             stmt.executeUpdate();
         } catch (Exception e) {
-            System.out.println("sqlerror" + e);
+            logger.error("ProductDao/removeAll: " + e.getMessage());
         }
     }
 
@@ -100,7 +106,7 @@ public class ProductDaoImpl implements ProductDao {
                 resultList.add(product);
             }
         } catch (Exception e) {
-            System.out.println("sqlerror" + e);
+            logger.error("ProductDao/getAll: " + e.getMessage());
         }
         return resultList;
     }
@@ -119,6 +125,7 @@ public class ProductDaoImpl implements ProductDao {
             stmt.setString(1, url);
         } catch (SQLException e) {
             e.printStackTrace();
+            logger.error("ProductDao/addPicture: " + e.getMessage());
         }
     }
 

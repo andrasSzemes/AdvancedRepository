@@ -7,6 +7,9 @@ public class ProductCategory {
     private String name;
     private List<Product> products = new ArrayList<>();
 
+    public ProductCategory() {
+    }
+
     public ProductCategory(String name) {
         this.name = name;
     }

@@ -2,6 +2,8 @@ package com.codecool.advanced_project.dao.implementation;
 
 import com.codecool.advanced_project.dao.ProductCategoryDao;
 import com.codecool.advanced_project.model.ProductCategory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ import java.util.List;
 public class ProductCategoryImpl implements ProductCategoryDao {
 
     private static ProductCategoryImpl instance;
+    private static final Logger logger = LoggerFactory.getLogger(ProductCategoryImpl.class);
 
     public static ProductCategoryImpl getInstance() {
         if (instance == null) {
@@ -29,7 +32,7 @@ public class ProductCategoryImpl implements ProductCategoryDao {
 
             stmt.executeUpdate();
         } catch (Exception e) {
-            System.out.println("sqlerror" + e);
+            logger.error("ProductCategoryDao/add: " + e.getMessage());
         }
     }
 
@@ -47,7 +50,7 @@ public class ProductCategoryImpl implements ProductCategoryDao {
             }
 
         } catch (Exception e) {
-            System.out.println("sqlerror" + e);
+            logger.error("ProductCategoryDao/find: " + e.getMessage());
         }
         return null;
     }
@@ -61,7 +64,7 @@ public class ProductCategoryImpl implements ProductCategoryDao {
             stmt.setInt(1, id);
             stmt.executeUpdate();
         } catch (Exception e) {
-            System.out.println("sqlerror" + e);
+            logger.error("ProductCategoryDao/remove: " + e.getMessage());
         }
     }
 
@@ -79,7 +82,7 @@ public class ProductCategoryImpl implements ProductCategoryDao {
                 resultList.add(category);
             }
         } catch (Exception e) {
-            System.out.println("sqlerror" + e);
+            logger.error("ProductCategoryDao/getAll: " + e.getMessage());
         }
         return resultList;
     }
@@ -92,7 +95,7 @@ public class ProductCategoryImpl implements ProductCategoryDao {
         ) {
             stmt.executeUpdate();
         } catch (Exception e) {
-            System.out.println("sqlerror" + e);
+            logger.error("ProductCategoryDao/removeAll: " + e.getMessage());
         }
     }
 
@@ -109,7 +112,7 @@ public class ProductCategoryImpl implements ProductCategoryDao {
 
 
         } catch (Exception e) {
-            System.out.println("sqlerror" + e);
+            logger.error("ProductCategoryDao/getId: " + e.getMessage());
         }
         return null;
     }
