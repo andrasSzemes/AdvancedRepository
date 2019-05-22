@@ -5,10 +5,8 @@ import java.util.List;
 
 public class ProductCategory {
     private String name;
+    private int id;
     private List<Product> products = new ArrayList<>();
-
-    public ProductCategory() {
-    }
 
     public ProductCategory(String name) {
         this.name = name;
