@@ -40,6 +40,7 @@ public class ProductDaoImpl implements ProductDao {
 
         } catch (Exception e) {
             logger.error("ProductDao/add: " + e.toString());
+            e.printStackTrace();
         }
         try (
                 Connection conn = getConnection();
@@ -52,6 +53,7 @@ public class ProductDaoImpl implements ProductDao {
             }
         } catch (SQLException e) {
             logger.error("ProductDao/add(getID): " + e.toString());
+            e.printStackTrace();
         }
     }
 
@@ -73,9 +75,9 @@ public class ProductDaoImpl implements ProductDao {
 
         } catch (Exception e) {
             logger.error("ProductDao/find: " + e.getMessage());
+            e.printStackTrace();
 
         }
-        logger.info("fails here");
         return null;
     }
 
@@ -89,6 +91,7 @@ public class ProductDaoImpl implements ProductDao {
             stmt.executeUpdate();
         } catch (Exception e) {
             logger.error("ProductDao/remove: " + e.getMessage());
+             e.printStackTrace();
         }
     }
 
@@ -101,6 +104,7 @@ public class ProductDaoImpl implements ProductDao {
             stmt.executeUpdate();
         } catch (Exception e) {
             logger.error("ProductDao/removeAll: " + e.getMessage());
+             e.printStackTrace();
         }
     }
 
@@ -119,6 +123,7 @@ public class ProductDaoImpl implements ProductDao {
             }
         } catch (Exception e) {
             logger.error("ProductDao/getAll: " + e.getMessage());
+             e.printStackTrace();
         }
         return resultList;
     }
@@ -138,6 +143,7 @@ public class ProductDaoImpl implements ProductDao {
         } catch (SQLException e) {
             e.printStackTrace();
             logger.error("ProductDao/addPicture: " + e.getMessage());
+             e.printStackTrace();
         }
     }
 
@@ -152,6 +158,7 @@ public class ProductDaoImpl implements ProductDao {
         } catch (SQLException e) {
             e.printStackTrace();
             logger.error("ProductDao/rename: " + e.getMessage());
+             e.printStackTrace();
         }
     }
 
