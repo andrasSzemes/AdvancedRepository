@@ -1,5 +1,7 @@
 package com.codecool.advanced_project;
 
+import com.codecool.advanced_project.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
