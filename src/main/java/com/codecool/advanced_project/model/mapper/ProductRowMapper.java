@@ -1,8 +1,7 @@
 package com.codecool.advanced_project.model.mapper;
 
 import com.codecool.advanced_project.model.Product;
-import com.codecool.advanced_project.dao.ProductCategoryDao;
-import com.codecool.advanced_project.model.Product;
+import com.codecool.advanced_project.service.dao.ProductCategoryDao;
 import com.codecool.advanced_project.model.ProductCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;

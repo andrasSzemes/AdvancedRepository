@@ -3,6 +3,7 @@ package com.codecool.advanced_project.service.dao.implementation;
 import com.codecool.advanced_project.model.Product;
 import com.codecool.advanced_project.model.ProductCategory;
 import com.codecool.advanced_project.service.dao.MemberGroupsDao;
+import com.codecool.advanced_project.service.dao.ProductCategoryDao;
 import com.codecool.advanced_project.service.dao.ProductDao;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -18,11 +19,13 @@ import static org.mockito.Mockito.when;
 class ProductDaoDbTest {
     private static ProductDao productDao;
     private static JdbcTemplate jdbcTemplateMock;
+    private static ProductCategoryDao productCategoryDaoMock;
 
     @BeforeAll
     static void setUp() {
         jdbcTemplateMock = mock(JdbcTemplate.class);
-        productDao = new ProductDaoDb(jdbcTemplateMock);
+        productCategoryDaoMock = mock(ProductCategoryDb.class);
+        productDao = new ProductDaoDb(productCategoryDaoMock, jdbcTemplateMock);
     }
 
     @Test
