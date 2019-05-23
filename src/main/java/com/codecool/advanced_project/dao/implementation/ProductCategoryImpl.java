@@ -42,19 +42,21 @@ public class ProductCategoryImpl implements ProductCategoryDao {
 
         } catch (Exception e) {
             logger.error("ProductCategoryDao/add: " + e.getMessage());
+            e.printStackTrace();
         }
         try (
                 Connection conn = getConnection();
 
                 PreparedStatement stmt = conn.prepareStatement("SELECT id FROM category_tag WHERE name = (?)")
-                ) {
-                    stmt.setString(1, category.getName());
-                    ResultSet resultSet = stmt.executeQuery();
-                    if (resultSet.next()) {
-                        category.setId(resultSet.getInt("id"));
-                    }
+        ) {
+            stmt.setString(1, category.getName());
+            ResultSet resultSet = stmt.executeQuery();
+            if (resultSet.next()) {
+                category.setId(resultSet.getInt("id"));
+            }
         } catch (SQLException e) {
             logger.error("ProductCategoryDao/add(getID): " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -71,6 +73,7 @@ public class ProductCategoryImpl implements ProductCategoryDao {
 
         } catch (Exception e) {
             logger.error("ProductCategoryDao/find: " + e.getMessage());
+            e.printStackTrace();
         }
         return null;
     }
@@ -102,6 +105,7 @@ public class ProductCategoryImpl implements ProductCategoryDao {
             stmt.executeUpdate();
         } catch (Exception e) {
             logger.error("ProductCategoryDao/remove: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -120,6 +124,7 @@ public class ProductCategoryImpl implements ProductCategoryDao {
             }
         } catch (Exception e) {
             logger.error("ProductCategoryDao/getAll: " + e.getMessage());
+            e.printStackTrace();
         }
         return resultList;
     }
@@ -133,6 +138,7 @@ public class ProductCategoryImpl implements ProductCategoryDao {
             stmt.executeUpdate();
         } catch (Exception e) {
             logger.error("ProductCategoryDao/removeAll: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -150,6 +156,7 @@ public class ProductCategoryImpl implements ProductCategoryDao {
 
         } catch (Exception e) {
             logger.error("ProductCategoryDao/getId: " + e.getMessage());
+            e.printStackTrace();
         }
         return null;
     }
