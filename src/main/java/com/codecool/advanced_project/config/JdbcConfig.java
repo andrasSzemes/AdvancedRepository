@@ -1,4 +1,4 @@
-package com.codecool.advanced_project.dao;
+package com.codecool.advanced_project.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
