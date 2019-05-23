@@ -41,8 +41,8 @@ public class GlobalDaoConfig {
     }
 
     @Autowired
-    public void setFindProduct(Function<Integer, Product> findProduct) {
-        this.findProduct = findProduct;
+    public void setFindProduct(Function<Integer, Product> getProduct) {
+        this.findProduct = getProduct;
     }
 
     @Bean(name = "ShoppingListDaoInUse")

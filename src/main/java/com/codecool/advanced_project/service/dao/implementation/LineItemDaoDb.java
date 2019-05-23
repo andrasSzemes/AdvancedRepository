@@ -13,6 +13,7 @@ import java.util.function.Function;
 
 public class LineItemDaoDb implements LineItemDao {
     private JdbcTemplate jdbcTemplate;
+    @Autowired
     private Function<Integer, Product> getProduct;
 
     @Autowired
