@@ -2,7 +2,7 @@ package com.codecool.advanced_project;
 
 import com.codecool.advanced_project.config.JdbcConfig;
 import com.codecool.advanced_project.model.ShoppingList;
-import com.codecool.advanced_project.service.ShoppingListDao;
+import com.codecool.advanced_project.service.dao.ShoppingListDao;
 import com.codecool.advanced_project.service.dao.implementation.ShoppingListDaoDb;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,23 +1,24 @@
 package com.codecool.advanced_project.controller;
 
-import com.codecool.advanced_project.service.dao.implementation.ShoppingListDaoDb;
 import com.codecool.advanced_project.model.ShoppingList;
+import com.codecool.advanced_project.service.dao.ShoppingListDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/shopping-list")
 public class ShoppingListController {
 
-    private ShoppingListDaoDb shoppingListDao;
+    private ShoppingListDao shoppingListDao;
 
     @Autowired
-    ShoppingListController(ShoppingListDaoDb shoppingListDao) {
-        this.shoppingListDao = shoppingListDao;
+    public ShoppingListController(ShoppingListDao ShoppingListDaoInUse) {
+        this.shoppingListDao = ShoppingListDaoInUse;
+    }
+
+    @GetMapping("/latest/{userId}")
+    public ShoppingList getUsersLatest(@PathVariable String userId) {
+        return shoppingListDao.getLatest(Integer.parseInt(userId));
     }
 
     @PostMapping("/add")
