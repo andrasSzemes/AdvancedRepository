@@ -3,129 +3,96 @@ package com.codecool.advanced_project.dao.implementation;
 import com.codecool.advanced_project.dao.ProductCategoryDao;
 import com.codecool.advanced_project.dao.ProductDao;
 import com.codecool.advanced_project.model.Product;
+import com.codecool.advanced_project.model.ProductCategory;
+import com.codecool.advanced_project.model.mapper.ProductRowMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class ProductDaoImpl implements ProductDao {
-    private List<Product> data = new ArrayList<>();
-    private static ProductDaoImpl instance = null;
-    private ProductCategoryDao productCategoryDao = ProductCategoryImpl.getInstance();
+    private JdbcTemplate jdbcTemplate;
+    private ProductCategoryDao productCategoryDao;
     private static final Logger logger = LoggerFactory.getLogger(ProductCategoryImpl.class);
 
-    private ProductDaoImpl() {
-    }
-
-    public static ProductDaoImpl getInstance() {
-        if (instance == null) {
-            instance = new ProductDaoImpl();
-        }
-        return instance;
+    @Autowired
+    public ProductDaoImpl(ProductCategoryDao productCategoryDao, JdbcTemplate jdbcTemplate) {
+        this.productCategoryDao = productCategoryDao;
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
     public void add(Product product) {
-        try (
-                Connection conn = getConnection();
-                PreparedStatement stmt = conn.prepareStatement("INSERT INTO product (name) values (?)")
+        String sql = "INSERT INTO product (name) values (?) RETURNING id";
+        Map<String, Object> queryRows = jdbcTemplate.queryForMap(sql, product.getName());
 
-        ) {
-            stmt.setString(1, product.getName());
-            stmt.executeQuery();
-
-        } catch (Exception e) {
-            logger.error("ProductDao/add: " + e.toString());
-            e.printStackTrace();
-        }
-        try (
-                Connection conn = getConnection();
-                PreparedStatement stmt = conn.prepareStatement("SELECT id FROM product WHERE name=(?)")
-        ) {
-            stmt.setString(1, product.getName());
-            ResultSet resultSet = stmt.executeQuery();
-            if (resultSet.next()) {
-                product.setId(resultSet.getInt("id"));
-            }
-        } catch (SQLException e) {
-            logger.error("ProductDao/add(getID): " + e.toString());
-            e.printStackTrace();
-        }
+        product.setId((int) queryRows.get("id"));
+//        logger.error("ProductDao/add(getID): " + e.toString());
     }
 
     @Override
     public Product find(int id) throws NullPointerException {
-        try (
-                Connection conn = getConnection();
-                PreparedStatement stmt = conn.prepareStatement(
-                        "SELECT product.name, product.category_tag_id as categoryid" +
-                                " FROM product JOIN category_tag ON product.category_tag_id = category_tag.id " +
-                                " WHERE product.id = (?)")
-        ) {
-            stmt.setInt(1, id);
+        String sql = "SELECT * FROM product WHERE id = (?)";
 
-            ResultSet resultSet = stmt.executeQuery();
-            if (resultSet.next()) {
-                return getProduct(resultSet);
-            }
-
-        } catch (Exception e) {
-            logger.error("ProductDao/find: " + e.getMessage());
-            e.printStackTrace();
-
+        Product product = null;
+        try {
+            product = jdbcTemplate.queryForObject(sql, new Object[]{id}, new ProductRowMapper(productCategoryDao));
         }
-        return null;
+        catch (NullPointerException e) {
+            logger.error("ProductDao/find: " + e.getMessage());
+        }
+
+        return product;
     }
 
     @Override
     public void remove(int id) {
-        try (
-                Connection conn = getConnection();
-                PreparedStatement stmt = conn.prepareStatement("DELETE FROM product WHERE id = (?)")
-        ) {
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
-        } catch (Exception e) {
-            logger.error("ProductDao/remove: " + e.getMessage());
-             e.printStackTrace();
-        }
+        String sql = "DELETE FROM product WHERE id = (?)";
+        jdbcTemplate.update(sql, new int[]{id});
+//        logger.error("ProductDao/remove: " + e.getMessage());
     }
 
     @Override
     public void removeAll() {
-        try (
-                Connection conn = getConnection();
-                PreparedStatement stmt = conn.prepareStatement("DELETE FROM product")
-        ) {
-            stmt.executeUpdate();
-        } catch (Exception e) {
-            logger.error("ProductDao/removeAll: " + e.getMessage());
-             e.printStackTrace();
-        }
+        String sql = "DELETE FROM product";
+        jdbcTemplate.execute(sql);
+//        logger.error("ProductDao/removeAll: " + e.getMessage());
     }
 
     @Override
     public List<Product> getAll() {
         List<Product> resultList = new ArrayList<>();
 
-        try (
-                Connection conn = getConnection();
-                PreparedStatement stmt = conn.prepareStatement("SELECT product.name, product.category_tag_id as categoryid FROM product")
-        ) {
-            ResultSet resultSet = stmt.executeQuery();
-            while (resultSet.next()) {
-                Product product = getProduct(resultSet);
-                resultList.add(product);
-            }
-        } catch (Exception e) {
-            logger.error("ProductDao/getAll: " + e.getMessage());
-             e.printStackTrace();
+        String sql = "SELECT * FROM product";
+        List<Map<String, Object>> queryRows = jdbcTemplate.queryForList(sql);
+
+        for (Map<String, Object> queryRow : queryRows) {
+            Product product = createProduct(queryRow);
+            resultList.add(product);
         }
+//        logger.error("ProductDao/getAll: " + e.getMessage());
         return resultList;
+    }
+
+    private Product createProduct(Map<String, Object> queryRow) {
+        Product product = new Product();
+
+        product.setId((int) queryRow.get("id"));
+        product.setName((String) queryRow.get("name"));
+        if (queryRow.get("category_tag_id") != null) {
+            ProductCategory category = productCategoryDao.findById((int) queryRow.get("category_tag_id"));
+            product.setCategory(category);
+        }
+        product.setPicture((String) queryRow.get("picture_url"));
+        return product;
     }
 
     @Override
@@ -135,31 +102,16 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public void addPicture(int id, String url) {
-        try (
-                Connection conn = getConnection();
-                PreparedStatement stmt = conn.prepareStatement("INSERT INTO product (picture_url) values (?)")
-        ) {
-            stmt.setString(1, url);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            logger.error("ProductDao/addPicture: " + e.getMessage());
-             e.printStackTrace();
-        }
+        String sql = "INSERT INTO product (picture_url) values (?)";
+        jdbcTemplate.update(sql, url);
+//        logger.error("ProductDao/addPicture: " + e.getMessage());
     }
 
     @Override
     public void rename(int id, String newName) {
-        try (
-                Connection conn = getConnection();
-                PreparedStatement stmt = conn.prepareStatement("UPDATE  product SET name = (?) WHERE id = (?)")
-        ) {
-            stmt.setString(1, newName);
-            stmt.setInt(2, id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            logger.error("ProductDao/rename: " + e.getMessage());
-             e.printStackTrace();
-        }
+        String sql = "UPDATE  product SET name = (?) WHERE id = (?)";
+        jdbcTemplate.update(sql, new Object[]{newName, id}, new int[]{Types.VARCHAR, Types.BIGINT});
+//        logger.error("ProductDao/rename: " + e.getMessage());
     }
 
     @Override
@@ -167,14 +119,4 @@ public class ProductDaoImpl implements ProductDao {
 
     }
 
-    private Product getProduct(ResultSet resultSet) throws SQLException {
-        return new Product(resultSet.getString("name"), productCategoryDao.findById(resultSet.getInt("categoryid")));
-    }
-
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(
-                "jdbc:postgresql://localhost:5432/local_test",
-                "csepelyd",
-                "csepelyd");
-    }
 }
