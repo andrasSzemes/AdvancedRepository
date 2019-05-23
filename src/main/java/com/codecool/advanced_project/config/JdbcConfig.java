@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 @Configuration
 @ComponentScan("com.codecool.advanced_project")
-public class SpringJdbcConfig {
+public class JdbcConfig {
 
     @Bean
     public DataSource postgresqlDataSource() {
