@@ -17,8 +17,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class ShoppingListDaoDbTest {
     private static ShoppingListDao shoppingListDao;
@@ -81,6 +80,18 @@ class ShoppingListDaoDbTest {
         expectedShoppingList.setLineItems(new ArrayList<>());
 
         assertEquals(expectedShoppingList, shoppingListDao.getLatest(1));
+    }
+
+    @Test
+    void testSaveNewShoppingListAddRecordToTable() {
+        String query = "INSERT INTO shopping_list(associated_shop_id, archived, member_id, group_id)VALUES (-1,FALSE,-1,?)";
+        int groupId = 1234;
+        ShoppingList shoppingList = new ShoppingList(groupId);
+
+        when(jdbcTemplateMock.update(query, groupId)).thenReturn(1);
+        shoppingListDao.saveNew(shoppingList);
+
+        verify(jdbcTemplateMock).update(query, groupId);
     }
 
 }

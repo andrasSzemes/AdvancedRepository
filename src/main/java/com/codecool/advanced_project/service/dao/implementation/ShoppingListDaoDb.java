@@ -28,6 +28,10 @@ public class ShoppingListDaoDb implements ShoppingListDao {
         this.getGroupIds = getGroupIds;
     }
 
+    public ShoppingListDaoDb(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     @Override
     public ShoppingList getLatest(int userId) {
 
@@ -75,5 +79,13 @@ public class ShoppingListDaoDb implements ShoppingListDao {
         queryBuilder.append(" ORDER BY id DESC LIMIT 1;");
         query = queryBuilder.toString();
         return query;
+    }
+
+    public void saveNew(ShoppingList shoppingList) {
+        String sql = "INSERT INTO shopping_list" +
+                "(associated_shop_id, archived, member_id, group_id)" +
+                "VALUES (-1,FALSE,-1,?)";
+
+        jdbcTemplate.update(sql, shoppingList.getGroupId());
     }
 }

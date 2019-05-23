@@ -5,9 +5,9 @@ import java.util.Objects;
 
 public class ShoppingList {
     private int id;
-    private int associatedShopId;
-    private boolean isArchived;
-    private int memberId;
+    private int associatedShopId = -1;
+    private boolean isArchived = false;
+    private int memberId = -1;
     private int groupId;
     private List<LineItem> lineItems;
 
@@ -20,8 +20,17 @@ public class ShoppingList {
         this.lineItems = lineItems;
     }
 
-    public ShoppingList() {
+    /**
+     * This constructor should be used, if a new list is created
+     *
+     * @param groupId shared account's identifier
+     */
+    public ShoppingList(int groupId) {
+        this.groupId = groupId;
+    }
 
+    public ShoppingList() {
+        //Needed for JSON sending
     }
 
     public int getId() {
