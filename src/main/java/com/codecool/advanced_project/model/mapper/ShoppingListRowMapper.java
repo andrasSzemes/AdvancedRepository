@@ -6,9 +6,9 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ShoppingListRowMapper implements RowMapper {
+public class ShoppingListRowMapper implements RowMapper<ShoppingList> {
     @Override
-    public Object mapRow(ResultSet resultSet, int i) throws SQLException {
+    public ShoppingList mapRow(ResultSet resultSet, int i) throws SQLException {
         ShoppingList shoppingList = new ShoppingList();
         shoppingList.setId(resultSet.getInt("id"));
         shoppingList.setAssociatedShopId(resultSet.getInt("associated_shop_id"));
