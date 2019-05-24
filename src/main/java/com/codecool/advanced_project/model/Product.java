@@ -1,20 +1,19 @@
 package com.codecool.advanced_project.model;
 
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Product {
     private int id;
-    private String name;
+    private String title;
     private ProductCategory category;
     private String picture;
     private List<String> tags = new ArrayList<>();
 
-    public Product(int id, String name, ProductCategory category, String picture) {
+    public Product(int id, String title, ProductCategory category, String picture) {
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.category = category;
         this.picture = picture;
     }
@@ -30,17 +29,17 @@ public class Product {
         this.id = id;
     }
 
-    public Product(String name, ProductCategory category) {
-        this.name = name;
+    public Product(String title, ProductCategory category) {
+        this.title = title;
         this.category = category;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getPicture() {
@@ -57,7 +56,7 @@ public class Product {
         if (!(o instanceof Product)) return false;
         Product product = (Product) o;
         return id == product.id &&
-                Objects.equals(name, product.name) &&
+                Objects.equals(title, product.title) &&
                 Objects.equals(category, product.category) &&
                 Objects.equals(picture, product.picture) &&
                 Objects.equals(tags, product.tags);
@@ -65,7 +64,7 @@ public class Product {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, category, picture, tags);
+        return Objects.hash(id, title, category, picture, tags);
     }
 
     public ProductCategory getCategory() {

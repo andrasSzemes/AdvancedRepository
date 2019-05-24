@@ -44,8 +44,8 @@ public class ProductDaoDb implements ProductDao {
 
     @Override
     public void add(Product product) {
-        String sql = "INSERT INTO product (name) values (?) RETURNING id";
-        Map<String, Object> queryRows = jdbcTemplate.queryForMap(sql, product.getName());
+        String sql = "INSERT INTO product (title) values (?) RETURNING id";
+        Map<String, Object> queryRows = jdbcTemplate.queryForMap(sql, product.getTitle());
 
         product.setId((int) queryRows.get("id"));
 //        logger.error("ProductDao/add(getID): " + e.toString());
@@ -84,7 +84,7 @@ public class ProductDaoDb implements ProductDao {
         Product product = new Product();
 
         product.setId((int) queryRow.get("id"));
-        product.setName((String) queryRow.get("name"));
+        product.setTitle((String) queryRow.get("name"));
         if (queryRow.get("category_tag_id") != null) {
             ProductCategory category = productCategoryDao.findById((int) queryRow.get("category_tag_id"));
             product.setCategory(category);
@@ -107,7 +107,7 @@ public class ProductDaoDb implements ProductDao {
 
     @Override
     public void rename(int id, String newName) {
-        String sql = "UPDATE  product SET name = (?) WHERE id = (?)";
+        String sql = "UPDATE  product SET title = (?) WHERE id = (?)";
         jdbcTemplate.update(sql, new Object[]{newName, id}, new int[]{Types.VARCHAR, Types.BIGINT});
 //        logger.error("ProductDao/rename: " + e.getMessage());
     }

@@ -14,21 +14,21 @@ drop table if exists shopping_list;
 create table custom_tag
 (
   id serial,
-  name varchar
+  title varchar
 );
 
 
 create table category_tag
 (
   id serial,
-  name varchar
+  title varchar
 );
 
 
 create table product
 (
   id serial,
-  name varchar,
+  title varchar,
   category_tag_id int,
   picture_URL varchar
 );
@@ -44,7 +44,7 @@ create table products_custom_tags
 create table group_account
 (
   id serial,
-  name varchar,
+  title varchar,
   picture_URL varchar
 );
 
@@ -59,7 +59,7 @@ create table saved_products
 create table member
 (
   id serial,
-  name varchar,
+  title varchar,
   email_address varchar,
   hashed_password varchar,
   status varchar
@@ -102,7 +102,7 @@ create table list_line_items
 create table favorite_shop
 (
   id serial,
-  name varchar,
+  title varchar,
   group_id int,
   address varchar,
   personal_note varchar
