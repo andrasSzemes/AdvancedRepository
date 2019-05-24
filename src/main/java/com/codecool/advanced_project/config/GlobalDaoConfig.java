@@ -2,14 +2,8 @@ package com.codecool.advanced_project.config;
 
 import com.codecool.advanced_project.model.LineItem;
 import com.codecool.advanced_project.model.Product;
-import com.codecool.advanced_project.service.dao.LineItemDao;
-import com.codecool.advanced_project.service.dao.MemberGroupsDao;
-import com.codecool.advanced_project.service.dao.ProductDao;
-import com.codecool.advanced_project.service.dao.ShoppingListDao;
-import com.codecool.advanced_project.service.dao.implementation.LineItemDaoDb;
-import com.codecool.advanced_project.service.dao.implementation.MemberGroupsDaoDb;
-import com.codecool.advanced_project.service.dao.implementation.ProductDaoDb;
-import com.codecool.advanced_project.service.dao.implementation.ShoppingListDaoDb;
+import com.codecool.advanced_project.service.dao.*;
+import com.codecool.advanced_project.service.dao.implementation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,9 +15,15 @@ import java.util.function.Function;
 @Configuration
 public class GlobalDaoConfig {
     private JdbcTemplate jdbcTemplate;
+    private ProductCategoryDao productCategoryDao;
     private Function<Integer, List<LineItem>> getAllLineItem;
     private Function<Integer, List<Integer>> getGroupIds;
     private Function<Integer, Product> findProduct;
+
+    @Autowired
+    public void setProductCategoryDao(ProductCategoryDao productCategoryDao) {
+        this.productCategoryDao = productCategoryDao;
+    }
 
     @Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -62,6 +62,6 @@ public class GlobalDaoConfig {
 
     @Bean(name = "ProductDaoInUse")
     public ProductDao getProductDaoImplementation() {
-        return new ProductDaoDb(jdbcTemplate);
+        return new ProductDaoDb(productCategoryDao, jdbcTemplate);
     }
 }
