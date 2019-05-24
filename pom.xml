@@ -53,6 +53,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+            <!-- look up the correct version! -->
             <version>42.1.4.jre7</version>
         </dependency>
         <dependency>
