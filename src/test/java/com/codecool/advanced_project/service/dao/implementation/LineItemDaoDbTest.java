@@ -2,6 +2,7 @@ package com.codecool.advanced_project.service.dao.implementation;
 
 import com.codecool.advanced_project.model.LineItem;
 import com.codecool.advanced_project.model.Product;
+import com.codecool.advanced_project.model.ProductCategory;
 import com.codecool.advanced_project.service.dao.LineItemDao;
 import com.codecool.advanced_project.service.dao.ProductDao;
 import org.junit.jupiter.api.BeforeAll;
@@ -56,7 +57,8 @@ class LineItemDaoDbTest {
 
     @Test
     void getShoppingListWithConnectedProduct() {
-        Product product = new Product(1, "product", 1, "picture");
+        ProductCategory category = new ProductCategory("category");
+        Product product = new Product(1, "product", category, "picture");
         LineItem lineItem = new LineItem(1, "1 valami", false, product);
         lineItemList.add(lineItem);
         when(jdbcTemplateMock.queryForList(anyString())).thenReturn(lineItemMapList);
