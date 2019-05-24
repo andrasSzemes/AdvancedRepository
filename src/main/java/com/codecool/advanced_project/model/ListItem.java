@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ShopItem {
+public class ListItem {
     private int id;
-    private String title;
-    private boolean completed;
+    private String groupId;
 }
