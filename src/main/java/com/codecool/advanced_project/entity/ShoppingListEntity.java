@@ -1,36 +1,40 @@
-package com.codecool.advanced_project.model;
+package com.codecool.advanced_project.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.List;
 import java.util.Objects;
 
-public class ShoppingList {
-    private int id;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+public class ShoppingListEntity {
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
     private int associatedShopId = -1;
     private boolean isArchived = false;
     private int memberId = -1;
     private int groupId;
-    private List<LineItem> lineItems;
-
-    public ShoppingList(int id, int associatedShopId, boolean isArchived, int memberId, int groupId, List<LineItem> lineItems) {
-        this.id = id;
-        this.associatedShopId = associatedShopId;
-        this.isArchived = isArchived;
-        this.memberId = memberId;
-        this.groupId = groupId;
-        this.lineItems = lineItems;
-    }
+    private List<LineItemEntity> lineItems;
 
     /**
      * This constructor should be used, if a new list is created
      *
      * @param groupId shared account's identifier
      */
-    public ShoppingList(int groupId) {
+    public ShoppingListEntity(int groupId) {
         this.groupId = groupId;
-    }
-
-    public ShoppingList() {
-        //Needed for JSON sending
     }
 
     public int getId() {
@@ -73,11 +77,11 @@ public class ShoppingList {
         this.groupId = groupId;
     }
 
-    public List<LineItem> getLineItems() {
+    public List<LineItemEntity> getLineItems() {
         return lineItems;
     }
 
-    public void setLineItems(List<LineItem> lineItems) {
+    public void setLineItems(List<LineItemEntity> lineItems) {
         this.lineItems = lineItems;
     }
 
@@ -97,7 +101,7 @@ public class ShoppingList {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ShoppingList that = (ShoppingList) o;
+        ShoppingListEntity that = (ShoppingListEntity) o;
         return id == that.id &&
                 associatedShopId == that.associatedShopId &&
                 isArchived == that.isArchived &&

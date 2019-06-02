@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface ProductCategoryRepository  extends JpaRepository<ProductCategoryEntity, Long> {
+public interface ProductCategoryRepository  extends JpaRepository<ProductCategoryEntity, Integer> {
 
 
-    Optional<ProductCategoryEntity> findById(Long id);
+    ProductCategoryEntity find(Integer id);
 
     ProductCategoryEntity findByName(String name);
 

@@ -1,8 +1,6 @@
 package com.codecool.advanced_project.controller;
 
 import com.codecool.advanced_project.entity.ProductEntity;
-import com.codecool.advanced_project.model.Product;
-import com.codecool.advanced_project.service.ProductService;
 import com.codecool.advanced_project.service.ProductServiceJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +16,7 @@ public class ProductControllerJPA {
     private ProductServiceJPA productServiceJPA;
 
     @GetMapping("/find/{id}")
-    public ProductEntity findProduct(@PathVariable("id") Long id) {
+    public ProductEntity findProduct(@PathVariable("id") int id) {
         return this.productServiceJPA.findById(id);
     }
 

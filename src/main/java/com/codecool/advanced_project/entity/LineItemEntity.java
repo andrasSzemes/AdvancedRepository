@@ -1,23 +1,30 @@
-package com.codecool.advanced_project.model;
+package com.codecool.advanced_project.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Objects;
 
-public class LineItem {
-    private int id;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+public class LineItemEntity {
+
+    @Id
+    @GeneratedValue
+    Integer id;
+
     private String quantity;
     private boolean isArchived;
-    private Product product;
+    private ProductEntity product;
 
-    public LineItem(int id, String quantity, boolean isArchived, Product product) {
-        this.id = id;
-        this.quantity = quantity;
-        this.isArchived = isArchived;
-        this.product = product;
-    }
-
-    public LineItem() {
-
-    }
 
     public int getId() {
         return id;
@@ -43,11 +50,11 @@ public class LineItem {
         isArchived = archived;
     }
 
-    public Product getProduct() {
+    public ProductEntity getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(ProductEntity product) {
         this.product = product;
     }
 
@@ -55,7 +62,7 @@ public class LineItem {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LineItem lineItem = (LineItem) o;
+        LineItemEntity lineItem = (LineItemEntity) o;
         return id == lineItem.id &&
                 isArchived == lineItem.isArchived &&
                 Objects.equals(quantity, lineItem.quantity) &&

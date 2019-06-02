@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
+public interface ProductRepository extends JpaRepository<ProductEntity, Integer> {
 
-    ProductEntity find(Long id);
+    ProductEntity find(Integer id);
 
     ProductEntity findByName(String name);
 
