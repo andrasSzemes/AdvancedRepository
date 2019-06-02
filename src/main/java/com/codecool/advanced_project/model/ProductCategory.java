@@ -1,7 +1,5 @@
 package com.codecool.advanced_project.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,6 +1,5 @@
 package com.codecool.advanced_project.model;
 
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
