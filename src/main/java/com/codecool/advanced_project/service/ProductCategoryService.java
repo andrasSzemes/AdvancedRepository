@@ -1,6 +1,6 @@
 package com.codecool.advanced_project.service;
 
-import com.codecool.advanced_project.dao.ProductCategoryDao;
+import com.codecool.advanced_project.service.dao.ProductCategoryDao;
 import com.codecool.advanced_project.model.ProductCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

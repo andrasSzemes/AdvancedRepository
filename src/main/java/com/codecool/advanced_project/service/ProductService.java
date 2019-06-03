@@ -1,7 +1,7 @@
 package com.codecool.advanced_project.service;
 
-import com.codecool.advanced_project.dao.ProductDao;
 import com.codecool.advanced_project.model.Product;
+import com.codecool.advanced_project.service.dao.ProductDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
