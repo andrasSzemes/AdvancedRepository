@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface ShoppingListRepository extends JpaRepository<ShoppingListEntity, Integer> {
+public interface ShoppingListRepository extends JpaRepository<ShoppingListEntity, Long> {
 
-    ShoppingListEntity find(Integer id);
+    ShoppingListEntity find(Long id);
 
     ShoppingListEntity findByName(String name);
 
@@ -16,14 +16,13 @@ public interface ShoppingListRepository extends JpaRepository<ShoppingListEntity
 
     List<ShoppingListEntity> findAll();
 
-    void removeById(Integer id);
+    void deleteById(Long id);
 
-    void removeAllBy();
+    void deleteAll();
 
-    List<ShoppingListEntity> getAllBy();
+    List<ShoppingListEntity> getAll();
 
     @Query("select name from shopping_list where id = (select max(id) from shopping_list )")
-    //TODO
+    //TODO check if all methods are migrated
     ShoppingListEntity getLatest();
-
 }

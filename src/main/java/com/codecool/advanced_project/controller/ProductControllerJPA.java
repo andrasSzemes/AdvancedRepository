@@ -16,7 +16,7 @@ public class ProductControllerJPA {
     private ProductServiceJPA productServiceJPA;
 
     @GetMapping("/find/{id}")
-    public ProductEntity findProduct(@PathVariable("id") int id) {
+    public ProductEntity findProduct(@PathVariable("id") Long id) {
         return this.productServiceJPA.findById(id);
     }
 

@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface ProductRepository extends JpaRepository<ProductEntity, Integer> {
+public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
 
-    ProductEntity find(Integer id);
+    ProductEntity find(Long id);
 
     ProductEntity findByName(String name);
 
@@ -16,11 +16,11 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
 
     List<ProductEntity> findAll();
 
-    void removeById(Long id);
+    void deleteById(Long id);
 
-    void removeAllBy();
+    void deleteAll();
 
-    List<ProductEntity> getAllBy();
+    List<ProductEntity> getAll();
 
 
 }

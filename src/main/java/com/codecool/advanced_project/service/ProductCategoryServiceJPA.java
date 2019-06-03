@@ -13,7 +13,7 @@ public class ProductCategoryServiceJPA {
     @Autowired
     ProductCategoryRepository productCategoryRepository;
 
-    public ProductCategoryEntity findById(Integer id) {
+    public ProductCategoryEntity findById(Long id) {
         return productCategoryRepository.find(id);
     }
 

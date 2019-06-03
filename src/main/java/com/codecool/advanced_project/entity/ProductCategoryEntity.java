@@ -14,12 +14,12 @@ public class ProductCategoryEntity {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
 
     @Column(unique = true)
     private String name;
 
     @EqualsAndHashCode.Exclude
-    @OneToMany
+    @OneToMany(mappedBy = "category")
     private List<ProductEntity> products;
 }

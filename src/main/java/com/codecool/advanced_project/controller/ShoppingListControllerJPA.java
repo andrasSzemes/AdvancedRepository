@@ -14,7 +14,7 @@ public class ShoppingListControllerJPA {
 
     @GetMapping("/latest/{userId}")
     public ShoppingListEntity getUsersLatest(@PathVariable String userId) {
-        return shoppingListServiceJPA.getLatest(Integer.parseInt(userId));
+        return shoppingListServiceJPA.getLatest(Long.parseLong(userId));
     }
 
     @PostMapping("/add")

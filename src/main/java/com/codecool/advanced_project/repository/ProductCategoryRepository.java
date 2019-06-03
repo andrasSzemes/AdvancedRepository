@@ -6,19 +6,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface ProductCategoryRepository  extends JpaRepository<ProductCategoryEntity, Integer> {
+public interface ProductCategoryRepository  extends JpaRepository<ProductCategoryEntity, Long> {
 
-
-    ProductCategoryEntity find(Integer id);
+    //todo check if only find is enough
+    ProductCategoryEntity find(Long id);
 
     ProductCategoryEntity findByName(String name);
 
-    void removeById(Long id);
+    void deleteById(Long id);
 
-    void removeAll();
+    void deleteAll();
 
     List<ProductCategoryEntity> findAll();
 
+    // todo check if it could be deleted
     int getIdByName(String name);
 
 

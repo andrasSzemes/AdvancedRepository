@@ -13,11 +13,11 @@ public class ShoppingListServiceJPA {
     @Autowired
     ShoppingListRepository shoppingListRepository;
 
-    public ShoppingListEntity getLatest(Integer userId) {
+    public ShoppingListEntity getLatest(Long userId) {
         return shoppingListRepository.getLatest();
     }
 
-    public ShoppingListEntity findById(Integer id) {
+    public ShoppingListEntity findById(Long id) {
         return shoppingListRepository.find(id);
     }
 

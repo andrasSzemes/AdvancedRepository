@@ -13,7 +13,7 @@ public class ProductServiceJPA {
     @Autowired
     ProductRepository productRepository;
 
-    public ProductEntity findById(Integer id) {
+    public ProductEntity findById(Long id) {
         return productRepository.find(id);
     }
 
@@ -25,6 +25,7 @@ public class ProductServiceJPA {
         return productRepository.findAll();
     }
 
-    public ProductEntity findByName(String name) { return productRepository.findByName(name);
+    public ProductEntity findByName(String name) {
+        return productRepository.findByName(name);
     }
 }

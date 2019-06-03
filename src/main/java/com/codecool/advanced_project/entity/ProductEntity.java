@@ -14,7 +14,7 @@ public class ProductEntity {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false, unique = true)
     private String name;
@@ -25,7 +25,8 @@ public class ProductEntity {
     @EqualsAndHashCode.Exclude
     private String pictureUrl;
 
-    @ManyToMany
+    @ManyToMany //todo check mapping
+    @EqualsAndHashCode.Exclude
     private List<CustomTagEntity> tags;
 }
 
