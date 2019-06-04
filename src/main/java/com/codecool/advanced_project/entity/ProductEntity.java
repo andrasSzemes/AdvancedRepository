@@ -28,6 +28,9 @@ public class ProductEntity {
     @ManyToMany //todo check mapping
     @EqualsAndHashCode.Exclude
     private List<CustomTagEntity> tags;
+
+    @OneToOne(mappedBy = "product")
+    private LineItemEntity lineItemEntity;
 }
 
 

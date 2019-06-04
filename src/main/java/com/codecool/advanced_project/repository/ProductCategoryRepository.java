@@ -8,8 +8,7 @@ import java.util.Optional;
 
 public interface ProductCategoryRepository  extends JpaRepository<ProductCategoryEntity, Long> {
 
-    //todo check if only find is enough
-    ProductCategoryEntity find(Long id);
+    Optional<ProductCategoryEntity> findById(Long id);
 
     ProductCategoryEntity findByName(String name);
 
@@ -18,9 +17,4 @@ public interface ProductCategoryRepository  extends JpaRepository<ProductCategor
     void deleteAll();
 
     List<ProductCategoryEntity> findAll();
-
-    // todo check if it could be deleted
-    int getIdByName(String name);
-
-
 }

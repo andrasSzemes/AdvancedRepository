@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ShoppingListServiceJPA {
@@ -14,22 +15,16 @@ public class ShoppingListServiceJPA {
     ShoppingListRepository shoppingListRepository;
 
     public ShoppingListEntity getLatest(Long userId) {
-        return shoppingListRepository.getLatest();
+        return shoppingListRepository.findFirstByMemberIdEqualsOrderById(userId);
     }
 
     public ShoppingListEntity findById(Long id) {
-        return shoppingListRepository.find(id);
+        Optional<ShoppingListEntity> shoppingListEntity = shoppingListRepository.findById(id);
+        if(shoppingListEntity.isPresent()) return shoppingListEntity.get();
+        return null;
     }
 
     public void saveNew(ShoppingListEntity newShoppingList) {
         shoppingListRepository.save(newShoppingList);
-    }
-
-    public List<ShoppingListEntity> getAll() {
-        return shoppingListRepository.findAll();
-    }
-
-    public ShoppingListEntity findByName(String name) {
-        return shoppingListRepository.findByName(name);
     }
 }

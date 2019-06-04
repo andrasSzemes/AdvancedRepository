@@ -1,18 +1,18 @@
 package com.codecool.advanced_project.repository;
 
+import com.codecool.advanced_project.entity.ProductCategoryEntity;
 import com.codecool.advanced_project.entity.ShoppingListEntity;
+import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ShoppingListRepository extends JpaRepository<ShoppingListEntity, Long> {
 
-    ShoppingListEntity find(Long id);
-
-    ShoppingListEntity findByName(String name);
-
-    List<ShoppingListEntity> findAllByCategory(ShoppingListEntity productCategory);
+    Optional<ShoppingListEntity> findById(Long id);
 
     List<ShoppingListEntity> findAll();
 
@@ -20,9 +20,5 @@ public interface ShoppingListRepository extends JpaRepository<ShoppingListEntity
 
     void deleteAll();
 
-    List<ShoppingListEntity> getAll();
-
-    @Query("select name from shopping_list where id = (select max(id) from shopping_list )")
-    //TODO check if all methods are migrated
-    ShoppingListEntity getLatest();
+    ShoppingListEntity findFirstByMemberIdEqualsOrderById(Long userID);
 }

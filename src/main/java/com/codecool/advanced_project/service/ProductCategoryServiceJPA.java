@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ProductCategoryServiceJPA {
@@ -14,7 +15,9 @@ public class ProductCategoryServiceJPA {
     ProductCategoryRepository productCategoryRepository;
 
     public ProductCategoryEntity findById(Long id) {
-        return productCategoryRepository.find(id);
+        Optional<ProductCategoryEntity> productCategoryEntity = productCategoryRepository.findById(id);
+        if(productCategoryEntity.isPresent()) return productCategoryEntity.get();
+        return null;
     }
 
     public void add(ProductCategoryEntity newProduct) {

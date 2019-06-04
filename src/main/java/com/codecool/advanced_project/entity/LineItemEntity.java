@@ -20,6 +20,7 @@ public class LineItemEntity {
     private Boolean isArchived;
 
     @EqualsAndHashCode.Exclude
+    @OneToOne
     private ProductEntity product;
 
     @ManyToOne
