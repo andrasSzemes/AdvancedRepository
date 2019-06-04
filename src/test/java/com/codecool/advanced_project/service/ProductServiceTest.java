@@ -4,9 +4,9 @@ class ProductServiceTest {
     //ProductDao productDao = ProductDaoImpl.getInstance();
 
 //    @Test
-//    void findById() {
+//    void findByID() {
 //        ProductService productService = new ProductService(productDao);
-//        productService.findById(1);
+//        productService.findByID(1);
 //        Mockito.verify(productDao).find(1);
 //    }
 }
