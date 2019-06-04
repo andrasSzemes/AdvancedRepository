@@ -5,13 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.lang.reflect.Array;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Data
@@ -30,10 +28,12 @@ public class ShopEntity {
 
     private String addres;
 
-    private Map<String, ArrayList<LocalTime>> openingHours;
+    @OneToOne
+    private OpeningHoursEntity openingHours;
 
     private Boolean open;
 
-    private ArrayList<CustomTagEntity> tags;
+    @ElementCollection
+    private List<CustomTagEntity> tags;
 
 }
