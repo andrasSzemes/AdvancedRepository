@@ -5,8 +5,11 @@ import com.codecool.advanced_project.service.ShoppingListServiceJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/shopping-list")
+@CrossOrigin
 public class ShoppingListControllerJPA {
 
     @Autowired
@@ -15,6 +18,11 @@ public class ShoppingListControllerJPA {
     @GetMapping("/latest/{userId}")
     public ShoppingListEntity getUsersLatest(@PathVariable String userId) {
         return shoppingListServiceJPA.getLatest(Long.parseLong(userId));
+    }
+
+    @GetMapping("/all")
+    public ShoppingListEntity getAll() {
+        return shoppingListServiceJPA.getAll();
     }
 
     @PostMapping("/add")

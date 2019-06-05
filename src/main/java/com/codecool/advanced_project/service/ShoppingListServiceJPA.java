@@ -27,4 +27,8 @@ public class ShoppingListServiceJPA {
     public void saveNew(ShoppingListEntity newShoppingList) {
         shoppingListRepository.save(newShoppingList);
     }
+
+    public ShoppingListEntity getAll() {
+        return shoppingListRepository.findAll().get(0);
+    }
 }

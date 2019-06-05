@@ -25,6 +25,7 @@ public class LineItemEntity {
 
     @ManyToOne
     @EqualsAndHashCode.Exclude
+    @Getter(AccessLevel.NONE)
     private ShoppingListEntity shoppingList;
 
 }

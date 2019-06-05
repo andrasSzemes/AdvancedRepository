@@ -29,7 +29,8 @@ public class ProductEntity {
     @EqualsAndHashCode.Exclude
     private List<CustomTagEntity> tags;
 
-    @OneToOne(mappedBy = "product")
+    @OneToOne(mappedBy = "product", cascade = CascadeType.PERSIST)
+    @Getter(AccessLevel.NONE)
     private LineItemEntity lineItemEntity;
 }
 

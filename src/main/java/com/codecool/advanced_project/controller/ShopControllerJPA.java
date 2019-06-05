@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/shop")
+@CrossOrigin
 public class ShopControllerJPA {
 
     @Autowired
