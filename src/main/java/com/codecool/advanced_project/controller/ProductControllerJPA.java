@@ -27,8 +27,7 @@ public class ProductControllerJPA {
 
     @PostMapping("/add")
     public ProductEntity addProduct(@RequestBody @Valid ProductEntity newProduct) {
-        this.productServiceJPA.add(newProduct);
-        return newProduct;
+        return this.productServiceJPA.add(newProduct);
     }
 
     @GetMapping("/list/all")

@@ -20,8 +20,8 @@ public class ProductServiceJPA {
         return null;
     }
 
-    public void add(ProductEntity newProduct) {
-        productRepository.save(newProduct);
+    public ProductEntity add(ProductEntity newProduct) {
+        return productRepository.save(newProduct);
     }
 
     public List<ProductEntity> getAll() {
