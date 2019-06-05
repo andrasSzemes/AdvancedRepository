@@ -1,9 +1,8 @@
 package com.codecool.advanced_project.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldNameConstants;
+import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
 
 import javax.persistence.*;
 import java.time.LocalTime;
@@ -20,25 +19,22 @@ public class OpeningHoursEntity {
     @GeneratedValue
     private Long id;
 
-    @ElementCollection
-    private List<LocalTime> monday;
+    /*
+        Number of the day during the week
+        Monday = 1 ... Sunday = 7
+     */
+    private Integer dayOfWeek;
 
-    @ElementCollection
-    private List<LocalTime> tuesday;
+    private LocalTime open;
 
-    @ElementCollection
-    private List<LocalTime> wednesday;
+    private LocalTime close;
 
-    @ElementCollection
-    private List<LocalTime> thursday;
+    private LocalTime breakStart;
 
-    @ElementCollection
-    private List<LocalTime> friday;
+    private LocalTime breakEnd;
 
-    @ElementCollection
-    private List<LocalTime> saturday;
-
-    @ElementCollection
-    private List<LocalTime> sunday;
+    @ManyToOne
+    @Getter(AccessLevel.NONE)
+    private ShopEntity shopEntity;
 
 }
