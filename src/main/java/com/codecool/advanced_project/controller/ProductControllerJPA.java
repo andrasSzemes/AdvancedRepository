@@ -9,29 +9,29 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/products")
 public class ProductControllerJPA {
 
     @Autowired
     private ProductServiceJPA productServiceJPA;
 
-    @GetMapping("/find/{id}")
+    @GetMapping("/{id}")
     public ProductEntity findProduct(@PathVariable("id") Long id) {
         return this.productServiceJPA.findById(id);
     }
 
-    @GetMapping("/find/{name}")
+    @GetMapping("/{name}")
     public ProductEntity findProductByName(@PathVariable("name") String name) {
         return this.productServiceJPA.findByName(name);
     }
 
-    @PostMapping("/add")
+    @PostMapping("")
     public ProductEntity addProduct(@RequestBody @Valid ProductEntity newProduct) {
         this.productServiceJPA.add(newProduct);
         return newProduct;
     }
 
-    @GetMapping("/list/all")
+    @GetMapping("")
     public List<ProductEntity> listProducts() {
         return this.productServiceJPA.getAll();
     }

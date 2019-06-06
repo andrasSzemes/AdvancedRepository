@@ -9,18 +9,18 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/shop")
+@RequestMapping("/shops")
 public class ShopControllerJPA {
 
     @Autowired
     ShopServiceJPA shopServiceJPA;
 
-    @GetMapping("/all")
+    @GetMapping("")
     public List<ShopEntity> getUsersShops() {
         return shopServiceJPA.getShops();
     }
 
-    @GetMapping("/add")
+    @GetMapping("")
     public ShopEntity addNewShop(@RequestBody @Valid ShopEntity shopEntity) {
         shopServiceJPA.addShop(shopEntity);
         return shopEntity;

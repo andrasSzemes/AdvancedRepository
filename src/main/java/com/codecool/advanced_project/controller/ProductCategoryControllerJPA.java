@@ -9,24 +9,24 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product-category")
+@RequestMapping("/product-categorys")
 public class ProductCategoryControllerJPA {
 
     @Autowired
     private ProductCategoryServiceJPA productCategoryServiceJPA;
 
-    @GetMapping("/find/{id}")
+    @GetMapping("/{id}")
     public ProductCategoryEntity findProductCategory(@PathVariable("id") Long id) {
         return this.productCategoryServiceJPA.findById(id);
     }
 
-    @PostMapping("/add")
+    @PostMapping("")
     public ProductCategoryEntity addProductCategory(@RequestBody @Valid ProductCategoryEntity newProductCategory) {
         productCategoryServiceJPA.add(newProductCategory);
         return newProductCategory;
     }
 
-    @GetMapping("/list/all")
+    @GetMapping("")
     public List<ProductCategoryEntity> listProductCategories() {
         return productCategoryServiceJPA.getAll();
     }
