@@ -16,7 +16,7 @@ public class ProductCategoryServiceJPA {
 
     public ProductCategoryEntity findById(Long id) {
         Optional<ProductCategoryEntity> productCategoryEntity = productCategoryRepository.findById(id);
-        if(productCategoryEntity.isPresent()) return productCategoryEntity.get();
+        if (productCategoryEntity.isPresent()) return productCategoryEntity.get();
         return null;
     }
 
@@ -28,6 +28,11 @@ public class ProductCategoryServiceJPA {
         return productCategoryRepository.findAll();
     }
 
-    public ProductCategoryEntity findByName(String name) { return productCategoryRepository.findByName(name);
+    public ProductCategoryEntity findByName(String name) {
+        return productCategoryRepository.findByName(name);
+    }
+
+    public int updateProductCategory(ProductCategoryEntity productCategoryEntity) {
+        return productCategoryRepository.updateProductCategory(productCategoryEntity, productCategoryEntity.getId());
     }
 }

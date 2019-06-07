@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/shopping-list")
+@RequestMapping("/shopping-lists")
+@CrossOrigin
 public class ShoppingListControllerJPA {
 
     @Autowired
@@ -17,7 +18,7 @@ public class ShoppingListControllerJPA {
         return shoppingListServiceJPA.getLatest(Long.parseLong(userId));
     }
 
-    @PostMapping("/add")
+    @PostMapping("")
     @ResponseBody
     public String addShoppingList(@RequestBody ShoppingListEntity shoppingList) {
         shoppingListServiceJPA.saveNew(shoppingList);

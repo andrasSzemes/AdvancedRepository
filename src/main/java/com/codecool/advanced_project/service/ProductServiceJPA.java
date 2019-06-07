@@ -16,7 +16,7 @@ public class ProductServiceJPA {
 
     public ProductEntity findById(Long id) {
         Optional<ProductEntity> productEntity = productRepository.findById(id);
-        if(productEntity.isPresent()) return productEntity.get();
+        if (productEntity.isPresent()) return productEntity.get();
         return null;
     }
 
@@ -30,5 +30,9 @@ public class ProductServiceJPA {
 
     public ProductEntity findByName(String name) {
         return productRepository.findByName(name);
+    }
+
+    public int updateProduct(ProductEntity productEntity) {
+        return productRepository.updateProduct(productEntity, productEntity.getId());
     }
 }

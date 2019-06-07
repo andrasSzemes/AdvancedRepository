@@ -11,18 +11,19 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/shop")
+@RequestMapping("/shops")
+@CrossOrigin
 public class ShopControllerJPA {
 
     @Autowired
     ShopServiceJPA shopServiceJPA;
 
-    @GetMapping("/all")
+    @GetMapping("")
     public List<ShopEntity> getUsersShops() {
         return shopServiceJPA.getShops();
     }
 
-    @PostMapping("/add")
+    @PostMapping("")
     public ShopEntity addNewShop(@RequestBody @Valid ShopEntity shopEntity) {
         return shopServiceJPA.addShop(shopEntity);
     }
