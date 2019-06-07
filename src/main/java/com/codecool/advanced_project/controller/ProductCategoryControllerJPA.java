@@ -5,7 +5,9 @@ import com.codecool.advanced_project.service.ProductCategoryServiceJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -29,5 +31,11 @@ public class ProductCategoryControllerJPA {
     @GetMapping("")
     public List<ProductCategoryEntity> listProductCategories() {
         return productCategoryServiceJPA.getAll();
+    }
+
+    @PutMapping("")
+    public void updateProductCategory(HttpServletResponse response, @RequestBody @Valid ProductCategoryEntity productCategoryEntity) throws IOException {
+        if (productCategoryServiceJPA.updateProductCategory(productCategoryEntity) == 0)
+            response.sendError(500, "Shop not found");
     }
 }
