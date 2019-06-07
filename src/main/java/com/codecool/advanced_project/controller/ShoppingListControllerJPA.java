@@ -18,8 +18,7 @@ public class ShoppingListControllerJPA {
         return shoppingListServiceJPA.getLatest(Long.parseLong(userId));
     }
 
-    @PostMapping("/add")
-    @ResponseBody
+    @PostMapping("/new")
     public String addShoppingList(@RequestBody ShoppingListEntity shoppingList) {
         shoppingListServiceJPA.saveNew(shoppingList);
         return "Successful";
