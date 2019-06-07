@@ -42,3 +42,22 @@ h1 {
     margin-left: 5vw;
     margin-right: 4vw;
 }
+
+.dot {
+    height: 0.5vw;
+    width: 1vw;
+    background-color: rgba(0,0,0,0.45);
+    border-radius: 10vw;
+    margin-left: 2vw;
+    display: inline-flex;
+    transform: translate(0%, 700%);
+    position: absolute;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+
+.slash {
+    width: 80vw;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
