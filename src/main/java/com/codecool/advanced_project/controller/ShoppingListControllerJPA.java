@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/shopping-list")
+@CrossOrigin
 public class ShoppingListControllerJPA {
 
     @Autowired
