@@ -36,6 +36,6 @@ public class ProductCategoryControllerJPA {
     @PutMapping("")
     public void updateProductCategory(HttpServletResponse response, @RequestBody @Valid ProductCategoryEntity productCategoryEntity) throws IOException {
         if (productCategoryServiceJPA.updateProductCategory(productCategoryEntity) == 0)
-            response.sendError(500, "Shop not found");
+            response.sendError(500, "Category not found");
     }
 }
