@@ -2,10 +2,7 @@ package com.codecool.advanced_project.entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Objects;
@@ -23,6 +20,8 @@ public class ShoppingListEntity {
 
     private Long associatedShopId = -1L;
 
+    @NotNull
+    @Column(columnDefinition = "boolean default false")
     private Boolean isArchived = false;
 
     private Long memberId = -1L;
