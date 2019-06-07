@@ -31,9 +31,11 @@ public class ShopServiceJPA {
     }
 
 
-    @PostMapping("/add")
-    public ShopEntity addShop(@RequestBody @Valid ShopEntity newShop) {
+    public ShopEntity addShop(ShopEntity newShop) {
         return this.shopRepository.save(newShop);
     }
 
+    public int updateShop(ShopEntity shopEntity) {
+        return shopRepository.updateShop(shopEntity, shopEntity.getId());
+    }
 }

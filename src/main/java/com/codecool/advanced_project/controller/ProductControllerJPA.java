@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/products")
+@CrossOrigin
 public class ProductControllerJPA {
 
     @Autowired
@@ -30,8 +31,7 @@ public class ProductControllerJPA {
 
     @PostMapping("")
     public ProductEntity addProduct(@RequestBody @Valid ProductEntity newProduct) {
-        this.productServiceJPA.add(newProduct);
-        return newProduct;
+        return this.productServiceJPA.add(newProduct);
     }
 
     @GetMapping("")
@@ -40,7 +40,7 @@ public class ProductControllerJPA {
     }
 
     @PutMapping("")
-public void updateProduct(HttpServletResponse response, @RequestBody @Valid ProductEntity productEntity) throws IOException {
+    public void updateProduct(HttpServletResponse response, @RequestBody @Valid ProductEntity productEntity) throws IOException {
         if (productServiceJPA.updateProduct(productEntity) == 0)
             response.sendError(500, "Product not found");
     }

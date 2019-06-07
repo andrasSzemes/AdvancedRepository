@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/product-categorys")
+@CrossOrigin
 public class ProductCategoryControllerJPA {
 
     @Autowired
