@@ -1,5 +1,5 @@
 body {
-    background-image: url("https://images.unsplash.com/photo-1447933601403-0c6688de566e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80");
+    background-image: url("/static/img/coffee_beans.jpeg");
 }
 
 h1 {
