@@ -5,22 +5,28 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.List;
 
+@Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Entity
-public class CustomTagEntity {
-
+public class GroupEntity {
     @Id
     @GeneratedValue
-    private Long id;
+    Long id;
 
-    @Column(unique = true)
     private String name;
+
+    private Long idOfOwner;
+
+    private String keyForConnection;
+
+    @ManyToMany
+    private List<AppUser> members;
 }
