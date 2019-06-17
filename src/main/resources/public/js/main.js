@@ -3,6 +3,10 @@ let backend_URL = "";
 let shoppingList;
 
 function setup() {
+    const shoppingList = document.createElement("div");
+    shoppingList.setAttribute("id", "shopping-list");
+    document.querySelector("body").appendChild(shoppingList);
+
     fetch('/config.json')
         .then(response => response.json())
         .then(jsonResponse => {
@@ -51,4 +55,4 @@ window.addEventListener('load-page', function () {
 
 
 //Called functions
-setup();
+// setup();
