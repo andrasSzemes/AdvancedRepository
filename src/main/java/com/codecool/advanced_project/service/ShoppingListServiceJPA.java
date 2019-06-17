@@ -17,7 +17,7 @@ public class ShoppingListServiceJPA {
 
     public ShoppingListEntity getLatest(Long userId) {
 //        return shoppingListRepository.findFirstByMemberIdEqualsOrderById(userId);
-        ShoppingListEntity shoppingListEntity = shoppingListRepository.findById(301L).get();
+        ShoppingListEntity shoppingListEntity = shoppingListRepository.findById(201L).get();
         for (LineItemEntity lineItem : shoppingListEntity.getLineItems()) {
             lineItem.getProduct().setLineItemEntity(null);
             lineItem.setShoppingList(null);

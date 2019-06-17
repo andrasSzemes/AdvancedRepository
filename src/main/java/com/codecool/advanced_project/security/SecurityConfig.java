@@ -32,6 +32,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                .antMatchers("/").permitAll() // allowed by anyone
+                .antMatchers("/js/**").permitAll() // allowed by anyone
+                .antMatchers("/img/**").permitAll() // allowed by anyone
+                .antMatchers("/css/**").permitAll() // allowed by anyone
+                .antMatchers("/config.json").permitAll() // allowed by anyone
+                .antMatchers("/manifest.json").permitAll() // allowed by anyone
                 .antMatchers("/auth/signin").permitAll() // allowed by anyone
                 .antMatchers("/**").authenticated() // allowed only when signed in
                 .anyRequest().denyAll() // anything else is denied
