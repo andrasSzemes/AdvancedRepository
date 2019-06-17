@@ -1,3 +1,5 @@
+import {swipe} from "/js/swipe.js";
+
 //Globals
 let backend_URL = "";
 let shoppingList;
@@ -53,6 +55,7 @@ window.addEventListener('load-page', function () {
         })
 })
 
+swipe();
 
 //Called functions
 // setup();
