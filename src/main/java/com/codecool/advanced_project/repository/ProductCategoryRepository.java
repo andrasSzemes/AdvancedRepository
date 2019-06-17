@@ -24,6 +24,6 @@ public interface ProductCategoryRepository extends JpaRepository<ProductCategory
 
     @Transactional
     @Modifying(clearAutomatically = true)
-    @Query("UPDATE ProductCategoryEntity product_category set product_category.name = :#{#entity.name} where shop.id = :id")
+    @Query("UPDATE ProductCategoryEntity product_category set product_category.name = :#{#entity.name} where product_category.id = :id")
     int updateProductCategory(@Param("entity") ProductCategoryEntity productCategoryEntity, @Param("id") Long id);
 }
