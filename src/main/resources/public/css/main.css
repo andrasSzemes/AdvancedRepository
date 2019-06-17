@@ -3,12 +3,57 @@ body {
 }
 
 h1 {
-    font-size: 70px;
+    top: 13vh;
+    font-size: 33px;
     font-family: fantasy;
     position: fixed;
-    left: 50vw;
-    transform: translate(-50%,0);
+    transform: translate(-3%,0);
     color: antiquewhite;
+    width: 100vw;
+    text-align: center;
+}
+
+#username, #password {
+    position: fixed;
+    transform: translate(-50%,0%);
+    left: 50vw;
+    font-size: 29px;
+    font-family: fantasy;
+    border: none;
+    background: dimgray;
+    box-shadow: 0px 0px 50px rgba(255,255,255,0.6), inset 0 0px 15px rgba(0,0,0, 0.5);
+    outline: none;
+    border-radius: 10px;
+    color: antiquewhite;
+    padding: 11px 15px 0px 15px;
+    width: 64vw;
+}
+
+#username {
+    top: 39vh;
+}
+
+#password {
+    top: 51vh;
+}
+
+.fa-sign-in-alt {
+    content: "\f2f6";
+    color: antiquewhite;
+    font-size: 80px;
+    position: fixed;
+    top: 63vh;
+    transform: translate(-50%, 0%) skew(-13deg, 0deg) scaleX(1.4);
+    left: 50vw;
+    animation-name: fade-in;
+    animation-duration: 3s;
+    opacity: 0.8;
+}
+
+@keyframes fade-in {
+    0%   {opacity: 0;}
+    60%  {opacity: 0;}
+    100% {opacity: 0.8;}
 }
 
 #shopping-list {
@@ -60,4 +105,17 @@ h1 {
     width: 80vw;
     transition-duration: 0.3s;
     transition-timing-function: ease-in-out;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: antiquewhite;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: antiquewhite;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: antiquewhite;
 }
