@@ -1,7 +1,5 @@
 export function addRegisterFunctionality() {
-    console.log(1);
     let button = document.querySelector("#add-user-circle");
-
     button.addEventListener("click", showRegisterModal);
 
 
@@ -14,11 +12,11 @@ export function addRegisterFunctionality() {
 
         let password2 = addWithClassToDOM("input", "password2");
         password2.placeholder = "verify password";
-        password2.classList.add("password2_move");
+        password2.classList.add("password2-move");
 
         let email = addWithClassToDOM("input", "email");
         email.placeholder = "email";
-        email.classList.add("email_move");
+        email.classList.add("email-move");
 
         let groupId = addWithClassToDOM("input", "group-id");
         groupId.placeholder = "group id";

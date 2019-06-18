@@ -4,18 +4,18 @@
     opacity: 0;
 }
 
-.password2_move, .email_move {
+.password2-move, .email-move {
     animation-duration: 0.6s;
     animation-delay: 0.1s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in-out;
 }
 
-.password2_move {
+.password2-move {
     animation-name: move-down-password;
 }
 
-.email_move {
+.email-move {
     animation-name: move-up-email;
 }
 
