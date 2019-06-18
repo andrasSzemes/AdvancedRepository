@@ -1,15 +1,3 @@
-.enlarge {
-    transform: scale(18) !important;
-    transition-duration: 0.5s;
-    box-shadow: 0 0 0 black !important;
-}
-
-.smalling {
-    transform: scale(0) !important;
-    transition-duration: 0.2s;
-}
-
-
 .password2 {
     z-index: 2;
     top: 51vh;
@@ -101,7 +89,7 @@
            opacity: 1;}
 }
 
-#send-register-icon {
+.send-register-icon {
     content: "\f2f6";
     color: antiquewhite;
     position: fixed;
@@ -111,6 +99,9 @@
     opacity: 0;
     height: 80px;
     z-index: 2;
+}
+
+.send-register-icon-fade-in {
     animation-name: fade-in2;
     animation-fill-mode: forwards;
     animation-duration: 0.8s;
@@ -120,4 +111,29 @@
 @keyframes fade-in2 {
     0%   {opacity: 0;}
     100%  {opacity: 1;}
+}
+
+@keyframes fade-out1 {
+    0%   {opacity: 0.8;}
+    100%  {opacity: 0;}
+}
+
+@keyframes fade-out2 {
+    0%   {opacity: 1;}
+    100%  {opacity: 0;}
+}
+
+.fade-out1, .fade-out2 {
+    animation-fill-mode: forwards;
+    animation-duration: 0.4s;
+    animation-delay: 0s !important;
+    transition-delay: 0s !important;
+}
+
+.fade-out1 {
+    animation-name: fade-out1;
+}
+
+.fade-out2 {
+    animation-name: fade-out2;
 }
