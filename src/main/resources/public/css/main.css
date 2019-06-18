@@ -38,23 +38,15 @@ h1 {
     top: 51vh;
 }
 
-.fa-sign-in-alt {
+#sign-in-icon {
     content: "\f2f6";
     color: antiquewhite;
-    font-size: 80px;
     position: fixed;
     top: 63vh;
     transform: translate(-50%, 0%) skew(-13deg, 0deg) scaleX(1.4);
     left: 50vw;
-    animation-name: fade-in;
-    animation-duration: 3s;
     opacity: 0.8;
-}
-
-@keyframes fade-in {
-    0%   {opacity: 0;}
-    60%  {opacity: 0;}
-    100% {opacity: 0.8;}
+    height: 80px;
 }
 
 #shopping-list {
