@@ -5,6 +5,7 @@ advanced_project.iml
 # Compiled class file
 *.class
 .idea
+advanced_project.iml
 
 # Log file
 *.log
