@@ -10,6 +10,7 @@ export function addRegisterFunctionality() {
         let filter = addWithClassToDOM("div", "register-filter");
         filter.classList.add("register-filter-fade-in");
 
+        //todo: type is not password!
         let password2 = addWithClassToDOM("input", "password2");
         password2.placeholder = "verify password";
         password2.classList.add("password2-move");
@@ -25,6 +26,7 @@ export function addRegisterFunctionality() {
         let registerIcon = addWithClassToDOM("img", "send-register-icon");
         registerIcon.src = "/img/sign-in-alt-solid.svg";
         registerIcon.classList.add("send-register-icon-fade-in");
+        registerIcon.addEventListener("click", sendRegisterRequest)
     }
 
     function hideRegisterModal() {
@@ -36,6 +38,20 @@ export function addRegisterFunctionality() {
         addClassThenDelete(".group-id", "fade-out2", 0.4);
         addClassThenDelete(".send-register-icon", "fade-out2", 0.4);
     }
+}
+
+function sendRegisterRequest() {
+    let json = "{";
+
+    let groupKey = document.querySelector(".group-id").value;
+    if (groupKey != "") { json += "\"groupKey\": \"" + groupKey + "\", "}
+    json += "\"email\": \"" + document.querySelector(".email").value + "\", ";
+    json += "\"username\": \"" + document.querySelector("#username").value + "\", ";
+    json += "\"password\": \"" + document.querySelector("#password").value + "\"";
+    json += "}";
+
+    console.log(json);
+    sendAjax("/users", "POST", json);
 }
 
 function addWithClassToDOM(tagType, classType) {
@@ -53,4 +69,22 @@ function addClassThenDelete(selector, classType, timeOut) {
 
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
+/**
+ * Sends an AJAX request.
+ * @param endpoint The endpoint of the request, for example "/login"
+ * @param method Request method. Can be "GET", "POST", "PUT", "DELETE",..
+ * @param params Parameters in URL format, like "param1=3&param3=asdf" or json
+ */
+function sendAjax(endpoint, method, params) {
+    const req = new XMLHttpRequest();
+    req.addEventListener("error", function (err) {
+        console.log("Request failed for " + endpoint + " error: " + err);
+    });
+    req.open(method, endpoint);
+    if (method === "POST" || method === "PUT") {
+        req.setRequestHeader("Content-type", "application/json");
+    }
+    req.send(params);
 }
