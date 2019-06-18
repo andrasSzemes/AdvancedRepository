@@ -1,0 +1,102 @@
+.enlarge {
+    transform: scale(18) !important;
+    transition-duration: 0.5s;
+    box-shadow: 0 0 0 black !important;
+}
+
+.smalling {
+    transform: scale(0) !important;
+    transition-duration: 0.2s;
+}
+
+
+.password2 {
+    z-index: 2;
+    top: 51vh;
+}
+
+.password2_move, .email_move {
+    animation-duration: 0.6s;
+    animation-delay: 0.1s;
+    animation-fill-mode: forwards;
+}
+
+.password2_move {
+    animation-name: move-down-password;
+}
+
+.email_move {
+    animation-name: move-up-email;
+}
+
+@keyframes move-down-password {
+    0%   {top: 51vh;}
+    100%  {top: 63vh;}
+}
+
+@keyframes move-up-email {
+    0%   {top: 39vh;}
+    100%  {top: 27vh;}
+}
+
+.email {
+    top: 39vh;
+    z-index: 2;
+}
+
+.email, .group-id, .password2 {
+    position: fixed;
+    transform: translate(-50%,0%);
+    left: 50vw;
+    font-size: 23px;
+    font-family: fantasy;
+    border: none;
+    background: dimgray;
+    box-shadow: 0px 0px 50px rgba(255,255,255,0.6), inset 0 0px 15px rgba(0,0,0, 0.5);
+    outline: none;
+    border-radius: 10px;
+    color: antiquewhite;
+    padding: 11px 15px 0px 15px;
+    width: 64vw;
+    height: 43px;
+}
+
+.register-filter {
+    background-color: burlywood;
+    position: fixed;
+    z-index: 1;
+    opacity: 0;
+    height: 100vh;
+    width: 100vw;
+    margin: -8px;
+}
+
+@keyframes fade-in {
+    0%   {opacity: 0;}
+    100%  {opacity: 0.8;}
+}
+
+.register-filter-fade-in {
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+    animation-name: fade-in;
+}
+
+.group-id {
+    top: 27vh;
+    z-index: 1;
+    opacity: 0;
+}
+
+.group-id-move {
+    animation-delay: 0.4s;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-name: move-up-group-id;
+}
+
+@keyframes move-up-group-id {
+    0%   {top: 27vh;}
+    100%  {top: 15vh;
+           opacity: 1;}
+}

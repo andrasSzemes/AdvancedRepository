@@ -17,7 +17,7 @@ h1 {
     position: fixed;
     transform: translate(-50%,0%);
     left: 50vw;
-    font-size: 29px;
+    font-size: 23px;
     font-family: fantasy;
     border: none;
     background: dimgray;
@@ -27,6 +27,7 @@ h1 {
     color: antiquewhite;
     padding: 11px 15px 0px 15px;
     width: 64vw;
+    z-index: 3;
 }
 
 #username {
@@ -130,6 +131,7 @@ h1 {
     height: 9vh;
     opacity: 0.9;
     margin: 2vh;
+    transition-duration: 0.5s;
 }
 
 #add-user-circle {
@@ -143,4 +145,6 @@ h1 {
     left: 1vw;
     opacity: 0.9;
     transform: scale(0.85);
+    transition-duration: 2s;
+    z-index: 2;
 }
