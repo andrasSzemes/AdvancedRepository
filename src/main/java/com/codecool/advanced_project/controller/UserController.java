@@ -3,6 +3,8 @@ package com.codecool.advanced_project.controller;
 import com.codecool.advanced_project.credentials.LoginCredentials;
 import com.codecool.advanced_project.credentials.RegistrationCredentials;
 import com.codecool.advanced_project.entity.AppUser;
+import com.codecool.advanced_project.entity.GroupEntity;
+import com.codecool.advanced_project.repository.GroupRepository;
 import com.codecool.advanced_project.repository.UserRepository;
 import com.codecool.advanced_project.security.JwtTokenServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +22,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -37,6 +38,10 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    //Todo: Ask mentors about the need of service layer
+    @Autowired
+    private GroupRepository groupRepository;
 
     public UserController(AuthenticationManager authenticationManager, JwtTokenServices jwtTokenServices, UserRepository users) {
         this.authenticationManager = authenticationManager;
@@ -68,12 +73,34 @@ public class UserController {
 
     @PostMapping
     public void register(@RequestBody RegistrationCredentials credentials) {
+        GroupEntity existingGroup = null;
+        if (credentials.getGroupKey() != null) {
+            existingGroup = groupRepository.findByKeyForConnection(credentials.getGroupKey());
+        }
+
         AppUser appUser = AppUser.builder()
                 .username(credentials.getUsername())
                 .email(credentials.getEmail())
                 .password(passwordEncoder.encode(credentials.getPassword()))
                 .build();
 
-        userRepository.save(appUser);
+        AppUser user = userRepository.save(appUser);
+
+        if (existingGroup != null) {
+            existingGroup.getMembers().add(appUser);
+            //Todo: Miki look here
+            groupRepository.deleteById(existingGroup.getId());
+            groupRepository.saveAndFlush(existingGroup);
+        }
+
+
+        GroupEntity group = GroupEntity.builder()
+                .idOfOwner(user.getId())
+                .name(user.getUsername())
+                .keyForConnection(appUser.hashCode() + "add+")
+                .members(new ArrayList<>(Arrays.asList(user)))
+                .build();
+
+        groupRepository.save(group);
     }
 }
