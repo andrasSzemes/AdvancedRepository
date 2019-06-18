@@ -3,6 +3,7 @@ package com.codecool.advanced_project.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Data
@@ -17,6 +18,9 @@ public class LineItemEntity {
     private Long id;
 
     private String quantity;
+
+    @NotNull
+    @Column(columnDefinition = "boolean default false")
     private Boolean isArchived;
 
     @EqualsAndHashCode.Exclude

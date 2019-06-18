@@ -1,0 +1,127 @@
+body {
+    background-image: url("/img/coffee_beans.jpeg");
+}
+
+h1 {
+    top: 13vh;
+    font-size: 33px;
+    font-family: fantasy;
+    position: fixed;
+    transform: translate(-3%,0);
+    color: antiquewhite;
+    width: 100vw;
+    text-align: center;
+}
+
+#username, #password {
+    position: fixed;
+    transform: translate(-50%,0%);
+    left: 50vw;
+    font-size: 29px;
+    font-family: fantasy;
+    border: none;
+    background: dimgray;
+    box-shadow: 0px 0px 50px rgba(255,255,255,0.6), inset 0 0px 15px rgba(0,0,0, 0.5);
+    outline: none;
+    border-radius: 10px;
+    color: antiquewhite;
+    padding: 11px 15px 0px 15px;
+    width: 64vw;
+}
+
+#username {
+    top: 39vh;
+}
+
+#password {
+    top: 51vh;
+}
+
+.fa-sign-in-alt {
+    content: "\f2f6";
+    color: antiquewhite;
+    font-size: 80px;
+    position: fixed;
+    top: 63vh;
+    transform: translate(-50%, 0%) skew(-13deg, 0deg) scaleX(1.4);
+    left: 50vw;
+    animation-name: fade-in;
+    animation-duration: 3s;
+    opacity: 0.8;
+}
+
+@keyframes fade-in {
+    0%   {opacity: 0;}
+    60%  {opacity: 0;}
+    100% {opacity: 0.8;}
+}
+
+#shopping-list {
+    position: fixed;
+    top: 12vh;
+    width: 90vw;
+    height: 88vh;
+    background-color: rgba(255, 228, 196,0.95);
+    left: 5vw;
+    box-shadow: 0px 0px 20px 7px rgba(0,0,0,0.45);
+    border-top-left-radius: 5vw;
+    border-top-right-radius: 5vw;
+}
+
+.line-item {
+    width: -webkit-fill-available;
+    margin: 30px;
+    font-size: 50px;
+    font-family: fantasy;
+    background-color: rgba(0,0,0,0.05);
+    box-shadow: 0 0 10px 5px rgba(0,0,0,0.05);
+    border-bottom: rgba(0,0,0,0.05);
+    border-bottom-width: 12px;
+    border-style: double;
+    border-width: 0px 0px 12px 0px;
+}
+
+.quantity {
+    width: 15vw;
+    display: inline-flex;
+    margin-left: 5vw;
+    margin-right: 4vw;
+}
+
+.dot {
+    height: 0.5vw;
+    width: 1vw;
+    background-color: rgba(0,0,0,0.45);
+    border-radius: 10vw;
+    margin-left: 2vw;
+    display: inline-flex;
+    transform: translate(0%, 700%);
+    position: absolute;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+
+.slash {
+    width: 80vw;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: antiquewhite;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: antiquewhite;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: antiquewhite;
+}
+
+.deleting {
+    transition-duration: 1s;
+    transition-property: opacity;
+    opacity: 0.7;
+}
