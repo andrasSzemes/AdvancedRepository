@@ -8,6 +8,7 @@ import com.codecool.advanced_project.repository.GroupRepository;
 import com.codecool.advanced_project.repository.UserRepository;
 import com.codecool.advanced_project.security.JwtTokenServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -17,10 +18,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Array;
 import java.util.*;
@@ -28,6 +26,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin
 public class UserController {
 
     private final AuthenticationManager authenticationManager;

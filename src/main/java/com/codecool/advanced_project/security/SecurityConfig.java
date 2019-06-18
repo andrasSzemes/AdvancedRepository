@@ -31,9 +31,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
+                .cors()
+                .and()
                 .authorizeRequests()
                 .antMatchers("/", "/js/**", "/img/**", "/css/**", "/config.json", "/manifest.json").permitAll() // allowed by anyone
-                .antMatchers("/users/**").permitAll() // allowed by anyone
+                .antMatchers("/users", "/users/**").permitAll() // allowed by anyone
                 .antMatchers("/**").authenticated() // allowed only when signed in
                 .anyRequest().denyAll() // anything else is denied
                 .and()
