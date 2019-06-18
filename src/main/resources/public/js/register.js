@@ -33,6 +33,14 @@ export function addRegisterFunctionality() {
 
         document.body.appendChild(groupId);
         groupId.classList.add("group-id-move");
+
+        // <img src="/img/sign-in-alt-solid.svg" id="sign-in-icon">
+
+        let registerIcon = document.createElement("img");
+        registerIcon.src = "/img/sign-in-alt-solid.svg";
+        registerIcon.setAttribute("id", "send-register-icon");
+        document.body.appendChild(registerIcon);
+
     });
 
 }
