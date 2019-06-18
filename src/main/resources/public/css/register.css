@@ -64,6 +64,11 @@
     height: 100vh;
     width: 100vw;
     margin: -8px;
+    transition-duration: 0.4s;
+}
+
+.register-filter-red {
+    background-color: chocolate;
 }
 
 @keyframes fade-in {

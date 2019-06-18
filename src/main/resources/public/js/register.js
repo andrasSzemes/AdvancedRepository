@@ -38,20 +38,20 @@ export function addRegisterFunctionality() {
         addClassThenDelete(".group-id", "fade-out2", 0.4);
         addClassThenDelete(".send-register-icon", "fade-out2", 0.4);
     }
-}
 
-function sendRegisterRequest() {
-    let json = "{";
+    function sendRegisterRequest() {
+        let json = "{";
 
-    let groupKey = document.querySelector(".group-id").value;
-    if (groupKey != "") { json += "\"groupKey\": \"" + groupKey + "\", "}
-    json += "\"email\": \"" + document.querySelector(".email").value + "\", ";
-    json += "\"username\": \"" + document.querySelector("#username").value + "\", ";
-    json += "\"password\": \"" + document.querySelector("#password").value + "\"";
-    json += "}";
+        let groupKey = document.querySelector(".group-id").value;
+        if (groupKey != "") { json += "\"groupKey\": \"" + groupKey + "\", "}
+        json += "\"email\": \"" + document.querySelector(".email").value + "\", ";
+        json += "\"username\": \"" + document.querySelector("#username").value + "\", ";
+        json += "\"password\": \"" + document.querySelector("#password").value + "\"";
+        json += "}";
 
-    console.log(json);
-    sendAjax("/users", "POST", json);
+        console.log(json);
+        sendAjax("/users", "POST", json, hideRegisterModal, changeFilterToRed);
+    }
 }
 
 function addWithClassToDOM(tagType, classType) {
@@ -67,6 +67,10 @@ function addClassThenDelete(selector, classType, timeOut) {
     sleep(timeOut*1000).then(() => element.parentNode.removeChild(element));
 }
 
+function changeFilterToRed() {
+    document.querySelector(".register-filter").classList.add("register-filter-red");
+}
+
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
@@ -77,8 +81,13 @@ const sleep = (milliseconds) => {
  * @param method Request method. Can be "GET", "POST", "PUT", "DELETE",..
  * @param params Parameters in URL format, like "param1=3&param3=asdf" or json
  */
-function sendAjax(endpoint, method, params) {
+function sendAjax(endpoint, method, params, onSuccess, onFail) {
     const req = new XMLHttpRequest();
+    req.addEventListener("load", function (event) {
+        //Todo: when failed, the response is an error message.. when success it's "". It's ok?
+        if (event.target.response === "") { onSuccess(); }
+        else { onFail(); }
+    });
     req.addEventListener("error", function (err) {
         console.log("Request failed for " + endpoint + " error: " + err);
     });
