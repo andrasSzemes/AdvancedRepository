@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Shopping list</title>
+    <script type="module" src="/js/main.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+
+    <link rel="manifest" href="/manifest.json">
+    <!-- Add iOS meta tags and icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Take that home darling">
+    <link rel="apple-touch-icon" href="/img/icons/icon-152x152.png">
+
+    <!-- Add description here -->
+    <meta name="description" content="A sample and intelligent shopping list app">
+
+    <!-- Add meta theme-color -->
+    <meta name="theme-color" content="#FAEBD7" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/27033315f2.js"></script>
+</head>
+
+<body>
+<h1><i>Take that home,<br>Darling</i></h1>
+
+<input id="username" placeholder="username" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+<input id="password" placeholder="password" type="password">
+<i class="fas fa-sign-in-alt"></i>
+
+<script>
+    // Register service worker.
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./service-worker.js')
+                .then((reg) => {
+                    console.log('Service worker registered.', reg);
+                });
+        });
+    }
+</script>
+</body>
+</html>
