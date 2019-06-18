@@ -1,20 +1,12 @@
 import {swipe} from "/js/swipe.js";
 
 //Globals
-let backend_URL = "";
 let shoppingList;
 
 function setup() {
     const shoppingList = document.createElement("div");
     shoppingList.setAttribute("id", "shopping-list");
     document.querySelector("body").appendChild(shoppingList);
-
-    fetch('/config.json')
-        .then(response => response.json())
-        .then(jsonResponse => {
-            backend_URL = jsonResponse.backend_URL;
-            dispatchEvent(new Event('load-page')); // custom event used for syncronized load
-        })
 }
 
 const addLineItem = function (lineItem) {
