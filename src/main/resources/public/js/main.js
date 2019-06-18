@@ -55,7 +55,6 @@ window.addEventListener('load-page', function () {
         })
 })
 
-swipe();
 
 //Called functions
 // setup();
