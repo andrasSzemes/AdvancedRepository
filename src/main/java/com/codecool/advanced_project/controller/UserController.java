@@ -21,19 +21,19 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/auth")
-public class AuthController {
+@RequestMapping("/users")
+public class UserController {
 
     private final AuthenticationManager authenticationManager;
 
     private final JwtTokenServices jwtTokenServices;
 
-    public AuthController(AuthenticationManager authenticationManager, JwtTokenServices jwtTokenServices, UserRepository users) {
+    public UserController(AuthenticationManager authenticationManager, JwtTokenServices jwtTokenServices, UserRepository users) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenServices = jwtTokenServices;
     }
 
-    @PostMapping("/signin")
+    @PostMapping("/auth")
     public ResponseEntity signin(@RequestBody UserCredentials data) {
         try {
             String username = data.getUsername();
