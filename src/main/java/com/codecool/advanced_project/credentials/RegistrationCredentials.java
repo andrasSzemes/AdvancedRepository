@@ -1,4 +1,4 @@
-package com.codecool.advanced_project.entity;
+package com.codecool.advanced_project.credentials;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserCredentials {
+public class RegistrationCredentials {
     private String username;
     private String password;
+    private String groupKey;
+    private String email;
 }
+
+//Todo: extends instead of copying fields, conflict with Lombok

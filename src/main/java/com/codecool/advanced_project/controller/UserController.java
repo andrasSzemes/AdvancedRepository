@@ -1,8 +1,11 @@
 package com.codecool.advanced_project.controller;
 
-import com.codecool.advanced_project.entity.UserCredentials;
+import com.codecool.advanced_project.credentials.LoginCredentials;
+import com.codecool.advanced_project.credentials.RegistrationCredentials;
+import com.codecool.advanced_project.entity.AppUser;
 import com.codecool.advanced_project.repository.UserRepository;
 import com.codecool.advanced_project.security.JwtTokenServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -10,6 +13,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,13 +33,18 @@ public class UserController {
 
     private final JwtTokenServices jwtTokenServices;
 
+    private final PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+
+    @Autowired
+    private UserRepository userRepository;
+
     public UserController(AuthenticationManager authenticationManager, JwtTokenServices jwtTokenServices, UserRepository users) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenServices = jwtTokenServices;
     }
 
     @PostMapping("/auth")
-    public ResponseEntity signin(@RequestBody UserCredentials data) {
+    public ResponseEntity signin(@RequestBody LoginCredentials data) {
         try {
             String username = data.getUsername();
             // authenticationManager.authenticate calls loadUserByUsername in CustomUserDetailsService
@@ -54,5 +64,16 @@ public class UserController {
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username/password supplied");
         }
+    }
+
+    @PostMapping
+    public void register(@RequestBody RegistrationCredentials credentials) {
+        AppUser appUser = AppUser.builder()
+                .username(credentials.getUsername())
+                .email(credentials.getEmail())
+                .password(passwordEncoder.encode(credentials.getPassword()))
+                .build();
+
+        userRepository.save(appUser);
     }
 }
