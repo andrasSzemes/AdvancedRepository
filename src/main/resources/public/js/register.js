@@ -2,45 +2,35 @@ export function addRegisterFunctionality() {
     console.log(1);
     let button = document.querySelector("#add-user-circle");
 
-    button.addEventListener("click", () => {
-        // button.classList.add("enlarge");
-        let filter = document.createElement("div");
-        filter.classList.add("register-filter");
-        document.body.appendChild(filter);
+    button.addEventListener("click", showRegisterModal);
+
+
+    function showRegisterModal() {
+        let filter = addWithClassToDOM("div", "register-filter");
         filter.classList.add("register-filter-fade-in");
 
-
-        // let icon = document.querySelector("#add-user-icon");
-        // icon.classList.add("smalling");
-
-        let password2 = document.createElement("input");
-        password2.classList.add("password2");
+        let password2 = addWithClassToDOM("input", "password2");
         password2.placeholder = "verify password";
-
-        document.body.appendChild(password2);
         password2.classList.add("password2_move");
 
-        let email = document.createElement("input");
-        email.classList.add("email");
+        let email = addWithClassToDOM("input", "email");
         email.placeholder = "email";
-
-        document.body.appendChild(email);
         email.classList.add("email_move");
 
-        let groupId = document.createElement("input");
-        groupId.classList.add("group-id");
+        let groupId = addWithClassToDOM("input", "group-id");
         groupId.placeholder = "group id";
-
-        document.body.appendChild(groupId);
         groupId.classList.add("group-id-move");
-
-        // <img src="/img/sign-in-alt-solid.svg" id="sign-in-icon">
 
         let registerIcon = document.createElement("img");
         registerIcon.src = "/img/sign-in-alt-solid.svg";
         registerIcon.setAttribute("id", "send-register-icon");
         document.body.appendChild(registerIcon);
+    }
+}
 
-    });
-
+function addWithClassToDOM(tagType, classType) {
+    const element = document.createElement(tagType);
+    element.classList.add(classType);
+    document.body.appendChild(element);
+    return element;
 }
