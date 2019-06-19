@@ -1,5 +1,6 @@
 import {swipe} from "/js/swipe.js";
 import {setupLoginPage} from "/js/login.js";
+import {addRegisterFunctionality} from "/js/register.js";
 
 //Globals
 let shoppingList;
@@ -48,6 +49,8 @@ window.addEventListener('load-page', function () {
         })
 })
 
+swipe();
+addRegisterFunctionality();
 
 //Called functions
 // setup();

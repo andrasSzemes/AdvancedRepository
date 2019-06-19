@@ -1,9 +1,6 @@
 package com.codecool.advanced_project.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -30,10 +27,14 @@ public class AppUser {
     private String email;
 
     @ManyToMany(mappedBy = "members")
-    private List<GroupEntity> groups;
+    @Builder.Default
+    @Getter(AccessLevel.NONE)
+    @EqualsAndHashCode.Exclude
+    private List<GroupEntity> groups = new ArrayList<>();
 
     // roles of the user (ADMIN, USER,..)
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
+    @EqualsAndHashCode.Exclude
     private List<String> roles = new ArrayList<>();
 }
