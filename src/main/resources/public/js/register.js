@@ -49,7 +49,6 @@ export function addRegisterFunctionality() {
         json += "\"password\": \"" + document.querySelector("#password").value + "\"";
         json += "}";
 
-        console.log(json);
         sendAjax("/users", "POST", json, hideRegisterModal, changeFilterToRed);
     }
 }

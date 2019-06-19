@@ -8,7 +8,6 @@ function sendLoginRequest() {
     json += "\"password\": \"" + document.querySelector("#password").value + "\"";
     json += "}";
 
-    console.log(json);
     sendAjax("/users/auth", "POST", json, () => {
         document.cookie = event.target.response;
         // console.log(JSON.parse(document.cookie).token);
