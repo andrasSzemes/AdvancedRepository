@@ -14,6 +14,11 @@ function sendLoginRequest() {
 function handleLoginSuccess() {
     document.cookie = event.target.response;
     // console.log(JSON.parse(document.cookie).token);
+    addClassThenDelete("h1", "fade-out3", 1);
+    addClassThenDelete("#username", "fade-out3", 1);
+    addClassThenDelete("#password", "fade-out3", 1);
+    addClassThenDelete("#sign-in-icon", "fade-out3", 1);
+    addClassThenDelete("#add-user-circle", "fade-out3", 1);
 }
 
 function handleLoginReject() {
@@ -49,4 +54,10 @@ function sendAjax(endpoint, method, params, onSuccess, onFail) {
 
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
+function addClassThenDelete(selector, classType, timeOut) {
+    let element = document.querySelector(selector);
+    element.classList.add(classType);
+    // sleep(timeOut*1000).then(() => element.parentNode.removeChild(element));
 }
