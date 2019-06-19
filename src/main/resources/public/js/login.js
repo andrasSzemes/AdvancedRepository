@@ -3,6 +3,7 @@ export function setupLoginPage() {
 }
 
 function sendLoginRequest() {
+    Haptics.vibrate(200);
     let json = "{";
     json += "\"username\": \"" + document.querySelector("#username").value + "\", ";
     json += "\"password\": \"" + document.querySelector("#password").value + "\"";
