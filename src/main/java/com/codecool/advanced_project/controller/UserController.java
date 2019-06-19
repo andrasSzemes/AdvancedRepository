@@ -61,8 +61,12 @@ public class UserController {
 
             String token = jwtTokenServices.createToken(username, roles);
 
+            Optional<AppUser> appUser = userRepository.findByUsername(username);
+
             Map<Object, Object> model = new HashMap<>();
             model.put("username", username);
+            model.put("userId", appUser.get().getId());
+            model.put("groups", appUser.get().getGroupJSONs());
             model.put("roles", roles);
             model.put("token", token);
             return ResponseEntity.ok(model);
