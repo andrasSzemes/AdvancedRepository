@@ -1,10 +1,8 @@
 //Globals
 let shoppingList;
 
-function setup() {
-    const shoppingList = document.createElement("div");
-    shoppingList.setAttribute("id", "shopping-list");
-    document.querySelector("body").appendChild(shoppingList);
+export function addShoppingListsFunctionality() {
+    let shoppingList = addWithClassToDOM("div", "shopping-list");
 }
 
 const addLineItem = function (lineItem) {
@@ -44,3 +42,10 @@ window.addEventListener('load-page', function () {
     }
 })
 })
+
+function addWithClassToDOM(tagType, classType) {
+    const element = document.createElement(tagType);
+    element.classList.add(classType);
+    document.body.appendChild(element);
+    return element;
+}

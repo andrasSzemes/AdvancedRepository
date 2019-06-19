@@ -1,5 +1,8 @@
+import {addShoppingListsFunctionality} from "/js/shopping-list.js";
+
 export function setupLoginPage() {
-    document.querySelector("#sign-in-icon").addEventListener("click", sendLoginRequest);
+    //document.querySelector("#sign-in-icon").addEventListener("click", sendLoginRequest);
+    document.querySelector("#sign-in-icon").addEventListener("click", addShoppingListsFunctionality);
 }
 
 function sendLoginRequest() {
