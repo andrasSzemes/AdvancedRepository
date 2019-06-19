@@ -10,7 +10,10 @@ function sendLoginRequest() {
 
     console.log(json);
     sendAjax("/users/auth", "POST", json, () => {
-    }, () => {
+        document.cookie = event.target.response;
+        // console.log(JSON.parse(document.cookie).token);
+
+}, () => {
         document.querySelector("#username").classList.add("warningBackground");
         document.querySelector("#password").classList.add("warningBackground");
         sleep(3000).then(() => {
