@@ -3,6 +3,17 @@ let shoppingList;
 
 export function addShoppingListsFunctionality() {
     let shoppingList = addWithClassToDOM("div", "shopping-list");
+    let title = addWithClassToDOM("h1", "title");
+    title.textContent = "Shopping list";
+
+    fetch('/shopping-lists/latest/-1', {method: 'GET'})
+        .then((response) => response.json())
+        .then((responseJson) => {
+            shoppingList = responseJson;
+
+            for (let i = 0; i < shoppingList.lineItems.length; i++) {
+                addLineItem(shoppingList.lineItems[i]);
+            }})
 
     let addLineItemButton = addWithClassToDOM("div", "add-line-item-circle");
     addLineItemButton.innerHTML = "<img src='/img/plus-solid.svg' class='add-line-item-icon'>";
@@ -17,14 +28,14 @@ const addLineItem = function (lineItem) {
         line.querySelector(".dot").classList.add("slash");
     }
 
-    const shoppingList = document.querySelector('#shopping-list');
+    const shoppingList = document.querySelector('.shopping-list');
     shoppingList.appendChild(line);
 
     line.addEventListener("click", () => {
         if (line.querySelector(".dot").classList.contains("slash")) {
         line.querySelector(".dot").classList.remove("slash");
     }
-else {
+    else {
         line.querySelector(".dot").classList.add("slash");
     }
     fetch(backend_URL + '/line-item/check',
@@ -34,17 +45,6 @@ else {
 })
 };
 
-window.addEventListener('load-page', function () {
-    fetch(backend_URL + '/shopping-list/latest/-1', {method: 'GET'})
-        .then((response) => response.json())
-.then((responseJson) => {
-        shoppingList = responseJson;
-
-    for (let i = 0; i < shoppingList.lineItems.length; i++) {
-        addLineItem(shoppingList.lineItems[i]);
-    }
-})
-})
 
 function addWithClassToDOM(tagType, classType) {
     const element = document.createElement(tagType);

@@ -3,6 +3,7 @@ package com.codecool.advanced_project.controller;
 import com.codecool.advanced_project.entity.LineItemEntity;
 import com.codecool.advanced_project.repository.LineItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,4 +19,9 @@ public class LineItemControllerJPA {
         lineItemRepository.updateArchivedState(lineItem.getId(), ! lineItem.getIsArchived());
         return "Successful";
     }
+
+//    @PostMapping
+//    public ResponseEntity addNewLineItem(@RequestBody LineItemEntity lineItem) {
+//        lineItemRepository.
+//    }
 }
