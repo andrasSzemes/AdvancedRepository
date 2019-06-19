@@ -1,5 +1,5 @@
 export function setupLoginPage() {
-    document.querySelector(".fa-sign-in-alt").addEventListener("click", sendLoginRequest);
+    document.querySelector("#sign-in-icon").addEventListener("click", sendLoginRequest);
 }
 
 function sendLoginRequest() {
@@ -31,8 +31,7 @@ function sendLoginRequest() {
 function sendAjax(endpoint, method, params, onSuccess, onFail) {
     const req = new XMLHttpRequest();
     req.addEventListener("load", function (event) {
-        //Todo: when failed, the response is an error message.. when success it's "". It's ok?
-        if (event.target.response > 0) { onSuccess(); }
+        if (req.status == 200) { onSuccess(); }
         else { onFail(); }
     });
     req.addEventListener("error", function (err) {
