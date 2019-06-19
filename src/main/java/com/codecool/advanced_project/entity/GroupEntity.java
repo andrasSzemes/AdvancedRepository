@@ -1,14 +1,9 @@
 package com.codecool.advanced_project.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,8 +20,21 @@ public class GroupEntity {
 
     private Long idOfOwner;
 
+    @Column(unique = true)
     private String keyForConnection;
 
     @ManyToMany
-    private List<AppUser> members;
+    @Builder.Default
+    @EqualsAndHashCode.Exclude
+    private List<AppUser> members = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "GroupEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", idOfOwner=" + idOfOwner +
+                ", keyForConnection='" + keyForConnection + '\'' +
+                '}';
+    }
 }
