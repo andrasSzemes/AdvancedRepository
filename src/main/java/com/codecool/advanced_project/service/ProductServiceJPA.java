@@ -14,10 +14,8 @@ public class ProductServiceJPA {
     @Autowired
     ProductRepository productRepository;
 
-    public ProductEntity findById(Long id) {
-        Optional<ProductEntity> productEntity = productRepository.findById(id);
-        if (productEntity.isPresent()) return productEntity.get();
-        return null;
+    public Optional<ProductEntity> findById(Long id) {
+        return this.productRepository.findById(id);
     }
 
     public ProductEntity add(ProductEntity newProduct) {
@@ -28,7 +26,7 @@ public class ProductServiceJPA {
         return productRepository.findAll();
     }
 
-    public ProductEntity findByName(String name) {
+    public Optional<ProductEntity> findByName(String name) {
         return productRepository.findByName(name);
     }
 

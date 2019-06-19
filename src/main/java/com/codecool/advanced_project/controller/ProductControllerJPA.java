@@ -1,15 +1,13 @@
 package com.codecool.advanced_project.controller;
 
 import com.codecool.advanced_project.entity.ProductEntity;
-import com.codecool.advanced_project.repository.ProductRepository;
 import com.codecool.advanced_project.service.ProductServiceJPA;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.IOException;
-import java.util.List;
 
 @RestController
 @RequestMapping("/products")
@@ -20,28 +18,37 @@ public class ProductControllerJPA {
     private ProductServiceJPA productServiceJPA;
 
     @GetMapping("/{id}")
-    public ProductEntity findProduct(@PathVariable("id") Long id) {
-        return this.productServiceJPA.findById(id);
+    public ResponseEntity findProduct(@PathVariable("id") Long id) {
+        if (this.productServiceJPA.findById(id).isPresent()) {
+            return ResponseEntity.ok(this.productServiceJPA.findById(id));
+        }
+        return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/{name}")
-    public ProductEntity findProductByName(@PathVariable("name") String name) {
-        return this.productServiceJPA.findByName(name);
+    public ResponseEntity findProductByName(@PathVariable("name") String name) {
+        if (this.productServiceJPA.findByName(name).isPresent()) {
+            return ResponseEntity.ok(this.productServiceJPA.findByName(name));
+        }
+        return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("")
-    public ProductEntity addProduct(@RequestBody @Valid ProductEntity newProduct) {
-        return this.productServiceJPA.add(newProduct);
+    public ResponseEntity addProduct(@RequestBody @Valid ProductEntity newProduct) {
+        return ResponseEntity.ok(this.productServiceJPA.add(newProduct));
     }
 
     @GetMapping("")
-    public List<ProductEntity> listProducts() {
-        return this.productServiceJPA.getAll();
+    public ResponseEntity listProducts() {
+        return ResponseEntity.ok(this.productServiceJPA.getAll());
     }
 
     @PutMapping("")
-    public void updateProduct(HttpServletResponse response, @RequestBody @Valid ProductEntity productEntity) throws IOException {
-        if (productServiceJPA.updateProduct(productEntity) == 0)
-            response.sendError(500, "Product not found");
+    public ResponseEntity updateProduct(@RequestBody @Valid ProductEntity productEntity) {
+        if (this.productServiceJPA.findById(productEntity.getId()).isPresent()) {
+            this.productServiceJPA.updateProduct(productEntity);
+            return ResponseEntity.noContent().build();
+        }
+        return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
     }
 }
