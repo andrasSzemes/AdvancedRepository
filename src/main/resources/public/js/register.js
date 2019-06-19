@@ -10,8 +10,8 @@ export function addRegisterFunctionality() {
         let filter = addWithClassToDOM("div", "register-filter");
         filter.classList.add("register-filter-fade-in");
 
-        //todo: type is not password!
         let password2 = addWithClassToDOM("input", "password2");
+        password2.type = "password";
         password2.placeholder = "verify password";
         password2.classList.add("password2-move");
 
