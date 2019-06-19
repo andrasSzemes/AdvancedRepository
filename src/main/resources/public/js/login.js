@@ -8,20 +8,22 @@ function sendLoginRequest() {
     json += "\"password\": \"" + document.querySelector("#password").value + "\"";
     json += "}";
 
-    sendAjax("/users/auth", "POST", json, () => {
-        document.cookie = event.target.response;
-        // console.log(JSON.parse(document.cookie).token);
-
-}, () => {
-        document.querySelector("#username").classList.add("warningBackground");
-        document.querySelector("#password").classList.add("warningBackground");
-        sleep(3000).then(() => {
-            document.querySelector("#username").classList.remove("warningBackground");
-            document.querySelector("#password").classList.remove("warningBackground");
-        })
-    });
+    sendAjax("/users/auth", "POST", json, handleLoginSuccess, handleLoginReject);
 }
 
+function handleLoginSuccess() {
+    document.cookie = event.target.response;
+    // console.log(JSON.parse(document.cookie).token);
+}
+
+function handleLoginReject() {
+    document.querySelector("#username").classList.add("warningBackground");
+    document.querySelector("#password").classList.add("warningBackground");
+    sleep(3000).then(() => {
+        document.querySelector("#username").classList.remove("warningBackground");
+    document.querySelector("#password").classList.remove("warningBackground");
+})
+}
 
 /**
  * Sends an AJAX request.
