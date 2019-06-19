@@ -1,0 +1,50 @@
+.shopping-list {
+    position: fixed;
+    top: 12vh;
+    width: 90vw;
+    height: 88vh;
+    background-color: rgba(255, 228, 196,0.95);
+    left: 5vw;
+    box-shadow: 0px 0px 20px 7px rgba(0,0,0,0.45);
+    border-top-left-radius: 5vw;
+    border-top-right-radius: 5vw;
+}
+
+.line-item {
+    width: -webkit-fill-available;
+    margin: 30px;
+    font-size: 50px;
+    font-family: fantasy;
+    background-color: rgba(0,0,0,0.05);
+    box-shadow: 0 0 10px 5px rgba(0,0,0,0.05);
+    border-bottom: rgba(0,0,0,0.05);
+    border-bottom-width: 12px;
+    border-style: double;
+    border-width: 0px 0px 12px 0px;
+}
+
+.quantity {
+    width: 15vw;
+    display: inline-flex;
+    margin-left: 5vw;
+    margin-right: 4vw;
+}
+
+.dot {
+    height: 0.5vw;
+    width: 1vw;
+    background-color: rgba(0,0,0,0.45);
+    border-radius: 10vw;
+    margin-left: 2vw;
+    display: inline-flex;
+    transform: translate(0%, 700%);
+    position: absolute;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+
+.slash {
+    width: 80vw;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
