@@ -9,8 +9,7 @@ function sendLoginRequest() {
     json += "}";
 
     console.log(json);
-    sendAjax("/auth/signin", "POST", json, () => {
-
+    sendAjax("/users/auth", "POST", json, () => {
     }, () => {
         document.querySelector("#username").classList.add("warningBackground");
         document.querySelector("#password").classList.add("warningBackground");
