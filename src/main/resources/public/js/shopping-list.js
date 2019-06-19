@@ -3,6 +3,9 @@ let shoppingList;
 
 export function addShoppingListsFunctionality() {
     let shoppingList = addWithClassToDOM("div", "shopping-list");
+
+    let addLineItemButton = addWithClassToDOM("div", "add-line-item-circle");
+    addLineItemButton.innerHTML = "<img src='/img/plus-solid.svg' class='add-line-item-icon'>";
 }
 
 const addLineItem = function (lineItem) {
