@@ -59,9 +59,12 @@ public class UserController {
                     .collect(Collectors.toList());
 
             String token = jwtTokenServices.createToken(username, roles);
-
+            Optional<AppUser> optionalAppUser = userRepository.findByUsername(username);
+            Long id = null;
+            if(optionalAppUser.isPresent()) id = optionalAppUser.get().getId();
             Map<Object, Object> model = new HashMap<>();
             model.put("username", username);
+            model.put("id", id);
             model.put("roles", roles);
             model.put("token", token);
             return ResponseEntity.ok(model);
