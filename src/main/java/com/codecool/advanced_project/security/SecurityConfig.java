@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/", "/js/**", "/img/**", "/css/**", "/config.json", "/manifest.json").permitAll() // allowed by anyone
-                .antMatchers("/auth/signin").permitAll() // allowed by anyone
+                .antMatchers("/users/**").permitAll() // allowed by anyone
                 .antMatchers("/**").authenticated() // allowed only when signed in
                 .anyRequest().denyAll() // anything else is denied
                 .and()

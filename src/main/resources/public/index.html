@@ -4,6 +4,7 @@
     <title>Shopping list</title>
     <script type="module" src="/js/main.js" defer></script>
     <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/css/register.css" />
 
     <link rel="manifest" href="/manifest.json">
     <!-- Add iOS meta tags and icons -->
@@ -27,7 +28,10 @@
 
 <input id="username" placeholder="username" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
 <input id="password" placeholder="password" type="password">
-<i class="fas fa-sign-in-alt"></i>
+<img src="/img/sign-in-alt-solid.svg" id="sign-in-icon">
+<div id="add-user-circle">
+    <img src="/img/user-plus-solid.svg" id="add-user-icon">
+</div>
 
 <script>
     // Register service worker.
