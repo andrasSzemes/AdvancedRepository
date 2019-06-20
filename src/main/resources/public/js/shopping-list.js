@@ -3,10 +3,6 @@ let shoppingList;
 
 export function addShoppingListsFunctionality() {
     // let shoppingList = addWithClassToDOM("div", "shopping-list");
-    //
-    //
-    // let addLineItemButton = addWithClassToDOM("div", "add-line-item-circle");
-    // addLineItemButton.innerHTML = "<img src='/img/plus-solid.svg' class='add-line-item-icon'>";
 
     addGroupChooserModal();
 
@@ -79,6 +75,9 @@ function loadLastListActGroup() {
         () => {
             let message = addWithClassToDOM("h1", "message1");
             message.innerHTML = "Add your first<br> shopping list!";
+
+            let addShoppingListButton = addWithClassToDOM("div", "add-circle");
+            addShoppingListButton.innerHTML = "<img src='/img/list-alt-regular.svg' class='add-shopping-list-icon'>";
         })
 }
 

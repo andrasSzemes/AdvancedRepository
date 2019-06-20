@@ -79,6 +79,12 @@
     margin: 1vh 1vh 1vh 1.7vh;
 }
 
+.add-shopping-list-icon {
+    height: 10vh;
+    opacity: 0.8;
+    margin: 2vh 1vh 1vh 2vh;
+}
+
 .groups-icon {
     height: 11vh;
     position: fixed;
