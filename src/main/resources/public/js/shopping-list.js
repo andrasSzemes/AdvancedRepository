@@ -93,7 +93,15 @@ function loadLastListActGroup() {
 }
 
 function addNewListSuccess() {
-    alert("success");
+    let shoppingListElement = addWithClassToDOM("div", "shopping-list");
+    console.log(JSON.parse(event.target.response));
+    console.log((JSON.parse(event.target.response)).listId);
+    let listId = (JSON.parse(event.target.response)).listId;
+    shoppingListElement.dataset.id = listId;
+
+    //DELETE message1, add-circle
+    addClassThenDelete(".message1", "fade-out3", 1);
+    addClassThenDelete(".add-circle", "fade-out3", 1);
 }
 
 function addNewListFail() {}
@@ -119,4 +127,14 @@ function sendAjax(endpoint, method, params, onSuccess, onFail) {
     }
     req.setRequestHeader("Authorization", "Bearer " + (JSON.parse(document.cookie)).token);
     req.send(params);
+}
+
+function addClassThenDelete(selector, classType, timeOut) {
+    let element = document.querySelector(selector);
+    element.classList.add(classType);
+    sleep(timeOut*1000).then(() => element.parentNode.removeChild(element));
+}
+
+const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
