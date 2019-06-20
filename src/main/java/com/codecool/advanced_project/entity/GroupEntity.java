@@ -14,7 +14,7 @@ import java.util.List;
 public class GroupEntity {
     @Id
     @GeneratedValue
-    Long id;
+    private Long id;
 
     private String name;
 

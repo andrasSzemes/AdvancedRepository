@@ -1,5 +1,6 @@
 package com.codecool.advanced_project.entity;
 
+import com.codecool.advanced_project.entity.helper.GroupEntityJSON;
 import lombok.*;
 
 import javax.persistence.*;
@@ -37,4 +38,12 @@ public class AppUser {
     @Builder.Default
     @EqualsAndHashCode.Exclude
     private List<String> roles = new ArrayList<>();
+
+    public List<GroupEntityJSON> getGroupJSONs() {
+        List<GroupEntityJSON> list = new ArrayList();
+        for (GroupEntity group : groups) {
+            list.add(new GroupEntityJSON(group.getId(), group.getName()));
+        }
+        return list;
+    }
 }

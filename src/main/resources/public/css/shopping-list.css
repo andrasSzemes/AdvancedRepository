@@ -1,0 +1,120 @@
+.shopping-list {
+    position: fixed;
+    top: 100vh;
+    width: 90vw;
+    height: 88vh;
+    background-color: rgba(237, 221, 199, 0.98);
+    left: 5vw;
+    box-shadow: inset 0px 0px 15px 3px rgba(0,0,0,0.45);
+    border-top-left-radius: 5vw;
+    border-top-right-radius: 5vw;
+    z-index: 1;
+    animation-name: move-in-first-list;
+    animation-duration: 0.4s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+}
+
+.line-item {
+    width: -webkit-fill-available;
+    margin: 30px;
+    font-size: 50px;
+    font-family: fantasy;
+    background-color: rgba(0,0,0,0.05);
+    box-shadow: 0 0 10px 5px rgba(0,0,0,0.05);
+    border-bottom: rgba(0,0,0,0.05);
+    border-bottom-width: 12px;
+    border-style: double;
+    border-width: 0px 0px 12px 0px;
+}
+
+.quantity {
+    width: 15vw;
+    display: inline-flex;
+    margin-left: 5vw;
+    margin-right: 4vw;
+}
+
+.dot {
+    height: 0.5vw;
+    width: 1vw;
+    background-color: rgba(0,0,0,0.45);
+    border-radius: 10vw;
+    margin-left: 2vw;
+    display: inline-flex;
+    transform: translate(0%, 700%);
+    position: absolute;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+
+.slash {
+    width: 80vw;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+
+@keyframes move-in-first-list {
+    0%   {top: 100vh;}
+    100%  {top: 20vh;}
+}
+
+.add-circle {
+    height: 14vh;
+    top: 85vh;
+    position: fixed;
+    left: 76vw;
+    z-index: 12;
+    background-color: burlywood;
+    width: 14vh;
+    box-shadow: inset 0 0px 15px rgba(0,0,0, 0.5);
+    border-radius: 7vh;
+    transform: scale(0.95);
+    opacity: 1;
+}
+
+.add-line-item-icon {
+    height: 12vh;
+    opacity: 0.8;
+    margin: 1vh 1vh 1vh 1.7vh;
+}
+
+.add-shopping-list-icon {
+    height: 10vh;
+    opacity: 0.8;
+    margin: 2vh 1vh 1vh 2vh;
+}
+
+.groups-icon {
+    height: 11vh;
+    position: fixed;
+    z-index: 3;
+}
+
+.groups-list {
+    height: 100vh;
+    width: 0vw;
+    margin: -8px;
+    position: fixed;
+    background-color: rgba(222, 184, 135,0.9);
+    transition-duration: 0.3s;
+    padding-top: 14vh;
+    color: transparent;
+    z-index: 3;
+}
+
+.groups-list-open {
+    padding-left: 3vw;
+    width: 41vw !important;
+    transition-duration: 0.3s;
+    color: antiquewhite !important;
+}
+
+.group-name {
+    font-size: 25px;
+    padding: 2vh 0;
+}
+
+.message1 {
+    top: 36vh;
+}
