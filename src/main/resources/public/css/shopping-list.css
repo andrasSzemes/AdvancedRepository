@@ -59,7 +59,7 @@
     100%  {top: 20vh;}
 }
 
-.add-line-item-circle {
+.add-circle {
     height: 14vh;
     top: 85vh;
     position: fixed;
@@ -69,7 +69,7 @@
     width: 14vh;
     box-shadow: inset 0 0px 15px rgba(0,0,0, 0.5);
     border-radius: 7vh;
-    transform: scale(0.85);
+    transform: scale(0.95);
     opacity: 1;
 }
 
@@ -106,4 +106,8 @@
 .group-name {
     font-size: 25px;
     padding: 2vh 0;
+}
+
+.message1 {
+    top: 36vh;
 }

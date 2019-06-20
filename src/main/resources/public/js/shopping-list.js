@@ -10,11 +10,10 @@ export function addShoppingListsFunctionality() {
 
     addGroupChooserModal();
 
-    document.body.dataset.actualGroup = -1;
     loadLastListActGroup();
 }
 
-const addLineItem = function (lineItem) {
+const addLineItem = function (lineItem, shoppingList) {
     const line = document.createElement('div');
     line.classList.add('line-item');
     line.innerHTML = "<div class='dot'></div><div class='quantity'>" + lineItem.quantity + "</div>" + lineItem.product.name;
@@ -23,7 +22,6 @@ const addLineItem = function (lineItem) {
         line.querySelector(".dot").classList.add("slash");
     }
 
-    const shoppingList = document.querySelector('#shopping-list');
     shoppingList.appendChild(line);
 
     line.addEventListener("click", () => {
@@ -39,18 +37,6 @@ else {
             headers: {'Content-Type': 'application/json'}})
 })
 };
-
-window.addEventListener('load-page', function () {
-    fetch(backend_URL + '/shopping-list/latest/-1', {method: 'GET'})
-        .then((response) => response.json())
-.then((responseJson) => {
-        shoppingList = responseJson;
-
-    for (let i = 0; i < shoppingList.lineItems.length; i++) {
-        addLineItem(shoppingList.lineItems[i]);
-    }
-})
-})
 
 function addWithClassToDOM(tagType, classType) {
     const element = document.createElement(tagType);
@@ -83,12 +69,15 @@ function loadLastListActGroup() {
         "GET",
         "",
         () => {
-            let message = addWithClassToDOM("h1", "message");
-            message.innerHTML = "This is the list!";
-            //event.target.response
+            let shoppingListElement = addWithClassToDOM("div", "shopping-list");
+            let shoppingListJSON = (JSON.parse(event.target.response)).shoppingList;
+
+            for (let i = 0; i < shoppingListJSON.lineItems.length; i++) {
+                addLineItem(shoppingListJSON.lineItems[i], shoppingListElement);
+            }
         },
         () => {
-            let message = addWithClassToDOM("h1", "message");
+            let message = addWithClassToDOM("h1", "message1");
             message.innerHTML = "Add your first<br> shopping list!";
         })
 }
