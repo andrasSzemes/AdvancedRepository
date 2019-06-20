@@ -8,11 +8,10 @@ export function addShoppingListsFunctionality() {
     // let addLineItemButton = addWithClassToDOM("div", "add-line-item-circle");
     // addLineItemButton.innerHTML = "<img src='/img/plus-solid.svg' class='add-line-item-icon'>";
 
-    let message = addWithClassToDOM("h1", "message");
-    message.innerHTML = "Add your first<br> shopping list!";
-
     addGroupChooserModal();
 
+    document.body.dataset.actualGroup = -1;
+    loadLastListActGroup();
 }
 
 const addLineItem = function (lineItem) {
@@ -77,4 +76,44 @@ function addGroupChooserModal() {
         if (groupsList.classList.contains("groups-list-open")) {groupsList.classList.remove("groups-list-open")}
     else {groupsList.classList.add("groups-list-open")};
     })
+}
+
+function loadLastListActGroup() {
+    sendAjax("/shopping-lists/latest-by-group/" + document.body.dataset.actualGroup,
+        "GET",
+        "",
+        () => {
+            let message = addWithClassToDOM("h1", "message");
+            message.innerHTML = "This is the list!";
+            //event.target.response
+        },
+        () => {
+            let message = addWithClassToDOM("h1", "message");
+            message.innerHTML = "Add your first<br> shopping list!";
+        })
+}
+
+
+
+/**
+ * Sends an AJAX request.
+ * @param endpoint The endpoint of the request, for example "/login"
+ * @param method Request method. Can be "GET", "POST", "PUT", "DELETE",..
+ * @param params Parameters in URL format, like "param1=3&param3=asdf" or json
+ */
+function sendAjax(endpoint, method, params, onSuccess, onFail) {
+    const req = new XMLHttpRequest();
+    req.addEventListener("load", function (event) {
+        if (req.status == 200) { onSuccess(); }
+        else { onFail(); }
+    });
+    req.addEventListener("error", function (err) {
+        console.log("Request failed for " + endpoint + " error: " + err);
+    });
+    req.open(method, endpoint);
+    if (method === "POST" || method === "PUT") {
+        req.setRequestHeader("Content-type", "application/json");
+    }
+    req.setRequestHeader("Authorization", "Bearer " + (JSON.parse(document.cookie)).token);
+    req.send(params);
 }
