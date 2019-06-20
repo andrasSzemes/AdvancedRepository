@@ -2,8 +2,6 @@
 let shoppingList;
 
 export function addShoppingListsFunctionality() {
-    // let shoppingList = addWithClassToDOM("div", "shopping-list");
-
     addGroupChooserModal();
 
     loadLastListActGroup();
@@ -94,8 +92,6 @@ function loadLastListActGroup() {
 
 function addNewListSuccess() {
     let shoppingListElement = addWithClassToDOM("div", "shopping-list");
-    console.log(JSON.parse(event.target.response));
-    console.log((JSON.parse(event.target.response)).listId);
     let listId = (JSON.parse(event.target.response)).listId;
     shoppingListElement.dataset.id = listId;
 
