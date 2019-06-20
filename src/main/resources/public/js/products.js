@@ -24,12 +24,13 @@ export function productsRequests() {
 
                 let handler = document.createElement("div");
                 handler.classList.add("product-list-handler");
-                handler.innerHTML = "<img src='/img/grip-lines-solid.svg' class='product-list-handler-icon'>"
+                handler.innerHTML = "<img src='/img/grip-lines-solid.svg' class='product-list-handler-icon'>";
                 productList.appendChild(handler);
                 swipe(".product-list-handler");
-                productList = responseJson;
-                for (let i = 0; i < productList.length; i++) {
-                    addProduct(productList[i]);
+                console.log(responseJson);
+                let productListJSON = responseJson;
+                for (let i = 0; i < productListJSON.length; i++) {
+                    addProduct(productListJSON[i]);
                 }
             })
     }
