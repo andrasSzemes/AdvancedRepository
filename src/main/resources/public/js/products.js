@@ -1,6 +1,6 @@
 export function productsRequests() {
 
-    document.querySelector("#products").addEventListener('click', showProducts);
+    document.querySelector(".add-product-icon").addEventListener('click', showProducts);
 
 
     function showProducts() {
@@ -86,6 +86,7 @@ function sendAjax(endpoint, method, params, onSuccess, onFail) {
     if (method === "POST" || method === "PUT") {
         req.setRequestHeader("Content-type", "application/json");
     }
+    req.setRequestHeader("Authorization", "Bearer " + (JSON.parse(document.cookie)).token);
     req.send(params);
 }
 

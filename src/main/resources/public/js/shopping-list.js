@@ -1,3 +1,4 @@
+import {productsRequests} from "/js/products.js";
 //Globals
 let shoppingList;
 
@@ -20,16 +21,17 @@ const addLineItem = function (lineItem, shoppingList) {
 
     line.addEventListener("click", () => {
         if (line.querySelector(".dot").classList.contains("slash")) {
-        line.querySelector(".dot").classList.remove("slash");
-    }
-else {
-        line.querySelector(".dot").classList.add("slash");
-    }
-    fetch(backend_URL + '/line-item/check',
-        {method: 'PUT',
-            body: JSON.stringify(lineItem),
-            headers: {'Content-Type': 'application/json'}})
-})
+            line.querySelector(".dot").classList.remove("slash");
+        } else {
+            line.querySelector(".dot").classList.add("slash");
+        }
+        fetch(backend_URL + '/line-item/check',
+            {
+                method: 'PUT',
+                body: JSON.stringify(lineItem),
+                headers: {'Content-Type': 'application/json'}
+            })
+    })
 };
 
 function addWithClassToDOM(tagType, classType) {
@@ -53,8 +55,12 @@ function addGroupChooserModal() {
     let groupsIcon = addWithClassToDOM("img", "groups-icon");
     groupsIcon.src = "/img/users-solid.svg";
     groupsIcon.addEventListener('click', () => {
-        if (groupsList.classList.contains("groups-list-open")) {groupsList.classList.remove("groups-list-open")}
-    else {groupsList.classList.add("groups-list-open")};
+        if (groupsList.classList.contains("groups-list-open")) {
+            groupsList.classList.remove("groups-list-open")
+        } else {
+            groupsList.classList.add("groups-list-open")
+        }
+        ;
     })
 }
 
@@ -70,6 +76,9 @@ function loadLastListActGroup() {
             for (let i = 0; i < shoppingListJSON.lineItems.length; i++) {
                 addLineItem(shoppingListJSON.lineItems[i], shoppingListElement);
             }
+            let addProductButton = addWithClassToDOM("div", "add-circle");
+            addProductButton.innerHTML = "<img src='/img/plus-solid.svg' class='add-product-icon'>";
+            productsRequests();
         },
         () => {
             let message = addWithClassToDOM("h1", "message1");
@@ -83,7 +92,7 @@ function loadLastListActGroup() {
                 let groupId = document.body.dataset.actualGroup;
 
                 let json = "{\"memberId\": \"" + usedId + "\", " +
-                            "\"groupId\": \"" + groupId + "\"}";
+                    "\"groupId\": \"" + groupId + "\"}";
 
                 sendAjax("/shopping-lists", "POST", json, addNewListSuccess, addNewListFail)
             })
@@ -98,9 +107,13 @@ function addNewListSuccess() {
     //DELETE message1, add-circle
     addClassThenDelete(".message1", "fade-out3", 1);
     addClassThenDelete(".add-circle", "fade-out3", 1);
+
+    let addProductButton = addWithClassToDOM("div", "add-circle");
+    addProductButton.innerHTML = "<img src='/img/plus-solid.svg' class='add-product-icon' class='add-product'>";
 }
 
-function addNewListFail() {}
+function addNewListFail() {
+}
 
 /**
  * Sends an AJAX request.
@@ -111,8 +124,11 @@ function addNewListFail() {}
 function sendAjax(endpoint, method, params, onSuccess, onFail) {
     const req = new XMLHttpRequest();
     req.addEventListener("load", function (event) {
-        if (req.status == 200) { onSuccess(); }
-        else { onFail(); }
+        if (req.status == 200) {
+            onSuccess();
+        } else {
+            onFail();
+        }
     });
     req.addEventListener("error", function (err) {
         console.log("Request failed for " + endpoint + " error: " + err);
@@ -128,7 +144,7 @@ function sendAjax(endpoint, method, params, onSuccess, onFail) {
 function addClassThenDelete(selector, classType, timeOut) {
     let element = document.querySelector(selector);
     element.classList.add(classType);
-    sleep(timeOut*1000).then(() => element.parentNode.removeChild(element));
+    sleep(timeOut * 1000).then(() => element.parentNode.removeChild(element));
 }
 
 const sleep = (milliseconds) => {
