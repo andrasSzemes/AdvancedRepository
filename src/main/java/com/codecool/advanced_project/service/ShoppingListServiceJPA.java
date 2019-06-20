@@ -16,8 +16,19 @@ public class ShoppingListServiceJPA {
     ShoppingListRepository shoppingListRepository;
 
     public ShoppingListEntity getLatest(Long userId) {
-//        return shoppingListRepository.findFirstByMemberIdEqualsOrderById(userId);
-        ShoppingListEntity shoppingListEntity = shoppingListRepository.findById(201L).get();
+        ShoppingListEntity shoppingListEntity = shoppingListRepository.findFirstByMemberIdEqualsOrderById(userId);
+//        ShoppingListEntity shoppingListEntity = shoppingListRepository.findById(201L).get();
+        for (LineItemEntity lineItem : shoppingListEntity.getLineItems()) {
+            lineItem.getProduct().setLineItemEntity(null);
+            lineItem.setShoppingList(null);
+        }
+
+        return shoppingListEntity;
+    }
+
+    public ShoppingListEntity getLatestByGroup(Long groupId) {
+        ShoppingListEntity shoppingListEntity = shoppingListRepository.findFirstByGroupIdOrderById(groupId);
+        if (shoppingListEntity == null) return null;
         for (LineItemEntity lineItem : shoppingListEntity.getLineItems()) {
             lineItem.getProduct().setLineItemEntity(null);
             lineItem.setShoppingList(null);
