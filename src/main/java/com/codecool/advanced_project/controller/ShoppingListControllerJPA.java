@@ -42,8 +42,12 @@ public class ShoppingListControllerJPA {
 
     @PostMapping("")
     @ResponseBody
-    public void addShoppingList(@RequestBody ShoppingListEntity shoppingList) {
-        shoppingListServiceJPA.saveNew(shoppingList);
+    public ResponseEntity addShoppingList(@RequestBody ShoppingListEntity shoppingList) {
+        ShoppingListEntity list = shoppingListServiceJPA.saveNew(shoppingList);
+
+        Map<Object, Object> model = new HashMap<>();
+        model.put("listId", list.getId());
+        return ResponseEntity.ok(model);
     }
 
     @PostMapping("/add")

@@ -43,7 +43,8 @@ public class ShoppingListServiceJPA {
         return null;
     }
 
-    public void saveNew(ShoppingListEntity newShoppingList) {
-        shoppingListRepository.save(newShoppingList);
+    public ShoppingListEntity saveNew(ShoppingListEntity newShoppingList) {
+        ShoppingListEntity entity = shoppingListRepository.save(newShoppingList);
+        return entity;
     }
 }
