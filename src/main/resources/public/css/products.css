@@ -96,7 +96,6 @@
 
 .product-list-handler {
     width: -webkit-fill-available;
-    background-color: red;
     height: 7vh;
     transform: translate(0%, -30%);
 }
@@ -110,6 +109,18 @@
 }
 
 @keyframes fade-out4 {
-    0%   {opacity: 1;}
-    100%  {opacity: 0;}
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.product-list-handler-icon {
+    position: absolute;
+    height: 5vh;
+    margin-left: 40vw;
+    margin-top: 0.9vh;
+    opacity: 0.6;
 }

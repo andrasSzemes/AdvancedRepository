@@ -24,6 +24,7 @@ export function productsRequests() {
 
                 let handler = document.createElement("div");
                 handler.classList.add("product-list-handler");
+                handler.innerHTML = "<img src='/img/grip-lines-solid.svg' class='product-list-handler-icon'>"
                 productList.appendChild(handler);
                 swipe(".product-list-handler");
                 productList = responseJson;
