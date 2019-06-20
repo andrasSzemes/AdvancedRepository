@@ -64,5 +64,5 @@ const sleep = (milliseconds) => {
 function addClassThenDelete(selector, classType, timeOut) {
     let element = document.querySelector(selector);
     element.classList.add(classType);
-    // sleep(timeOut*1000).then(() => element.parentNode.removeChild(element));
+    sleep(timeOut*1000).then(() => element.parentNode.removeChild(element));
 }
