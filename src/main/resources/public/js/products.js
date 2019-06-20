@@ -1,3 +1,5 @@
+import {swipe} from "/js/swipe.js";
+
 export function productsRequests() {
 
     document.querySelector(".add-product-icon").addEventListener('click', showProducts);
@@ -6,18 +8,24 @@ export function productsRequests() {
     function showProducts() {
         let productList = addWithClassToDOM("div", "product-list");
 
-        let title = addWithClassToDOM("h1", "title");
-        title.textContent = "Product list";
+        let title = addWithClassToDOM("h1", "products-title");
+        title.textContent = "Product List";
+        //TODO add menu icon
 
-        let addLineItemButton = addWithClassToDOM("div", "add-product-circle");
-        addLineItemButton.innerHTML = "<img src='/img/plus-solid.svg' class='add-product-icon' id='add-product'>";
+        //let addProductElement = addWithClassToDOM("div", "add-product-circle");
+        //addProductElement.innerHTML = "<img src='/img/plus-solid.svg' class='add-product-icon' id='add-product'>";
 
-        document.querySelector("#add-product").addEventListener('click', addNewProduct);
+        //document.querySelector("#add-product").addEventListener('click', addNewProduct);
 
 
         fetch('/products', {method: 'GET'})
             .then((response) => response.json())
             .then((responseJson) => {
+
+                let handler = document.createElement("div");
+                handler.classList.add("product-list-handler");
+                productList.appendChild(handler);
+                swipe(".product-list-handler");
                 productList = responseJson;
                 for (let i = 0; i < productList.length; i++) {
                     addProduct(productList[i]);
@@ -31,11 +39,15 @@ export function productsRequests() {
         line.classList.add('product');
         line.innerHTML = '<div class="product-name">' + product.name + '</div>';
 
-        line.addEventListener('click', makeEditable);
+        //adds product from product list to shopping list
+        let list = document.querySelector(".shopping-list");
+        line.addEventListener('click', () => {
+            addToShoppingList(product.name, "", list)
+        });
 
-        const shoppingList = document.querySelector('.product-list');
+        const productList = document.querySelector('.product-list');
 
-        shoppingList.appendChild(line);
+        productList.appendChild(line);
 
     };
 
@@ -50,19 +62,34 @@ export function productsRequests() {
     }
 }
 
+
 //TODO
-function addNewProduct(name) {
+/*function addNewProduct(name) {
     sendAjax("products", "POST", name, alert("Success"), alert("Fail"))
-}
+}*/
 
-function makeEditable(event) {
-    event.target.innerHTML = '<input value="' + event.target.innerText + '">';
-    event.target.addEventListener('blur', sendUpdate);
-}
+const addToShoppingList = function (productName, quantity, shoppingList) {
+    const line = document.createElement('div');
+    line.classList.add('line-item');
+    line.innerHTML = "<div class='dot'></div><div class='quantity'>" + quantity + "</div>" + productName;
 
-function sendUpdate() {
-    alert("yesss")
-}
+
+    shoppingList.appendChild(line);
+
+    line.addEventListener("click", () => {
+        if (line.querySelector(".dot").classList.contains("slash")) {
+            line.querySelector(".dot").classList.remove("slash");
+        } else {
+            line.querySelector(".dot").classList.add("slash");
+        }
+        fetch('/line-item/check',
+            {
+                method: 'PUT',
+                body: JSON.stringify(lineItem),
+                headers: {'Content-Type': 'application/json'}
+            })
+    })
+};
 
 /**
  * Sends an AJAX request.

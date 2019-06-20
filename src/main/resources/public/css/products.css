@@ -1,3 +1,14 @@
+.products-title {
+    top: 6vh;
+    font-size: 33px;
+    font-family: fantasy;
+    position: fixed;
+    transform: translate(-3%, 0);
+    color: antiquewhite;
+    width: 100vw;
+    text-align: center;
+}
+
 .product-list {
     position: fixed;
     top: 100vh;
@@ -5,10 +16,10 @@
     height: 88vh;
     background-color: rgba(237, 221, 199, 0.98);
     left: 5vw;
-    box-shadow: inset 0px 0px 15px 3px rgba(0,0,0,0.45);
+    box-shadow: inset 0px 0px 15px 3px rgba(0, 0, 0, 0.45);
     border-top-left-radius: 5vw;
     border-top-right-radius: 5vw;
-    z-index: 11;
+    z-index: 4;
     animation-name: move-in-first-list;
     animation-duration: 0.4s;
     animation-fill-mode: forwards;
@@ -20,9 +31,9 @@
     margin: 30px;
     font-size: 50px;
     font-family: fantasy;
-    background-color: rgba(0,0,0,0.05);
-    box-shadow: 0 0 10px 5px rgba(0,0,0,0.05);
-    border-bottom: rgba(0,0,0,0.05);
+    background-color: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.05);
+    border-bottom: rgba(0, 0, 0, 0.05);
     border-bottom-width: 12px;
     border-style: double;
     border-width: 0px 0px 12px 0px;
@@ -38,7 +49,7 @@
 .dot {
     height: 0.5vw;
     width: 1vw;
-    background-color: rgba(0,0,0,0.45);
+    background-color: rgba(0, 0, 0, 0.45);
     border-radius: 10vw;
     margin-left: 2vw;
     display: inline-flex;
@@ -55,8 +66,12 @@
 }
 
 @keyframes move-in-first-list {
-    0%   {top: 100vh;}
-    100%  {top: 20vh;}
+    0% {
+        top: 100vh;
+    }
+    100% {
+        top: 20vh;
+    }
 }
 
 .add-product-circle {
@@ -67,7 +82,7 @@
     z-index: 12;
     background-color: burlywood;
     width: 14vh;
-    box-shadow: inset 0 0px 15px rgba(0,0,0, 0.5);
+    box-shadow: inset 0 0px 15px rgba(0, 0, 0, 0.5);
     border-radius: 7vh;
     transform: scale(0.85);
     opacity: 1;
@@ -77,4 +92,24 @@
     height: 12vh;
     opacity: 0.8;
     margin: 1vh 1vh 1vh 1.7vh;
+}
+
+.product-list-handler {
+    width: -webkit-fill-available;
+    background-color: red;
+    height: 7vh;
+    transform: translate(0%, -30%);
+}
+
+.fade-out4 {
+    animation-fill-mode: forwards;
+    animation-delay: 0s !important;
+    transition-delay: 0s !important;
+    animation-name: fade-out3;
+    animation-duration: 0.2s;
+}
+
+@keyframes fade-out4 {
+    0%   {opacity: 1;}
+    100%  {opacity: 0;}
 }

@@ -63,8 +63,8 @@
     height: 14vh;
     top: 85vh;
     position: fixed;
-    left: 76vw;
-    z-index: 12;
+    left: 72vw;
+    z-index: 3;
     background-color: burlywood;
     width: 14vh;
     box-shadow: inset 0 0px 15px rgba(0,0,0, 0.5);
@@ -88,7 +88,7 @@
 .groups-icon {
     height: 11vh;
     position: fixed;
-    z-index: 3;
+    z-index: 6;
 }
 
 .groups-list {
@@ -100,7 +100,7 @@
     transition-duration: 0.3s;
     padding-top: 14vh;
     color: transparent;
-    z-index: 3;
+    z-index: 5;
 }
 
 .groups-list-open {

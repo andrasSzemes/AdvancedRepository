@@ -25,7 +25,7 @@ const addLineItem = function (lineItem, shoppingList) {
         } else {
             line.querySelector(".dot").classList.add("slash");
         }
-        fetch(backend_URL + '/line-item/check',
+        fetch('/line-item/check',
             {
                 method: 'PUT',
                 body: JSON.stringify(lineItem),
