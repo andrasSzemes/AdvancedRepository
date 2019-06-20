@@ -1,5 +1,6 @@
 import {swipe} from "/js/swipe.js";
 import {addRegisterFunctionality} from "/js/register.js";
+import {productsRequests} from "/js/products.js";
 
 //Globals
 let backend_URL = "";
@@ -58,6 +59,7 @@ window.addEventListener('load-page', function () {
 
 swipe();
 addRegisterFunctionality();
+productsRequests();
 
 //Called functions
 // setup();
