@@ -11,22 +11,7 @@ export function addShoppingListsFunctionality() {
     let message = addWithClassToDOM("h1", "message");
     message.innerHTML = "Add your first<br> shopping list!";
 
-    let groupsList = addWithClassToDOM("div", "groups-list");
-    for (let group of JSON.parse(document.cookie).groups) {
-        let groupDiv = document.createElement("div");
-        groupDiv.classList.add("group-name");
-        groupDiv.innerText = group.name;
-        groupDiv.dataset.id = group.id;
-        groupsList.appendChild(groupDiv);
-    }
-
-
-    let groupsIcon = addWithClassToDOM("img", "groups-icon");
-    groupsIcon.src = "/img/users-solid.svg";
-    groupsIcon.addEventListener('click', () => {
-        if (groupsList.classList.contains("groups-list-open")) {groupsList.classList.remove("groups-list-open")}
-        else {groupsList.classList.add("groups-list-open")};
-    })
+    addGroupChooserModal();
 
 }
 
@@ -73,4 +58,23 @@ function addWithClassToDOM(tagType, classType) {
     element.classList.add(classType);
     document.body.appendChild(element);
     return element;
+}
+
+function addGroupChooserModal() {
+    let groupsList = addWithClassToDOM("div", "groups-list");
+    for (let group of JSON.parse(document.cookie).groups) {
+        let groupDiv = document.createElement("div");
+        groupDiv.classList.add("group-name");
+        groupDiv.innerText = group.name;
+        groupDiv.dataset.id = group.id;
+        groupsList.appendChild(groupDiv);
+    }
+
+
+    let groupsIcon = addWithClassToDOM("img", "groups-icon");
+    groupsIcon.src = "/img/users-solid.svg";
+    groupsIcon.addEventListener('click', () => {
+        if (groupsList.classList.contains("groups-list-open")) {groupsList.classList.remove("groups-list-open")}
+    else {groupsList.classList.add("groups-list-open")};
+    })
 }
