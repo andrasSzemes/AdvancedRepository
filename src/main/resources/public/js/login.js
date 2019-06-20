@@ -17,6 +17,7 @@ function sendLoginRequest() {
 
 function handleLoginSuccess() {
     document.cookie = event.target.response;
+    document.body.dataset.actualGroup = (JSON.parse(document.cookie)).groups[0].id;
     // console.log(JSON.parse(document.cookie).token);
     addClassThenDelete("h1", "fade-out3", 1);
     addClassThenDelete("#username", "fade-out3", 1);
