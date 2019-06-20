@@ -33,7 +33,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/", "/js/**", "/img/**", "/css/**", "/manifest.json").permitAll() // allowed by anyone
-                .antMatchers("/users/**").permitAll() // allowed by anyone
+                //TODO check authentication
+                //TODO remove "/products"
+                .antMatchers("/users/**", "/products").permitAll() // allowed by anyone
                 .antMatchers("/**").authenticated() // allowed only when signed in
                 .anyRequest().denyAll() // anything else is denied
                 .and()
