@@ -2,7 +2,6 @@ import {addShoppingListsFunctionality} from "/js/shopping-list.js";
 
 export function setupLoginPage() {
     document.querySelector("#sign-in-icon").addEventListener("click", sendLoginRequest);
-    document.querySelector("#sign-in-icon").addEventListener("click", addShoppingListsFunctionality);
 }
 
 function sendLoginRequest() {
@@ -24,6 +23,7 @@ function handleLoginSuccess() {
     addClassThenDelete("#password", "fade-out3", 1);
     addClassThenDelete("#sign-in-icon", "fade-out3", 1);
     addClassThenDelete("#add-user-circle", "fade-out3", 1);
+    addShoppingListsFunctionality();
 }
 
 function handleLoginReject() {
