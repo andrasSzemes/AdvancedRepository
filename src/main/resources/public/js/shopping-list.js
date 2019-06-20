@@ -78,10 +78,24 @@ function loadLastListActGroup() {
 
             let addShoppingListButton = addWithClassToDOM("div", "add-circle");
             addShoppingListButton.innerHTML = "<img src='/img/list-alt-regular.svg' class='add-shopping-list-icon'>";
+
+            addShoppingListButton.addEventListener("click", () => {
+                let usedId = (JSON.parse(document.cookie)).userId;
+                let groupId = document.body.dataset.actualGroup;
+
+                let json = "{\"memberId\": \"" + usedId + "\", " +
+                            "\"groupId\": \"" + groupId + "\"}";
+
+                sendAjax("/shopping-lists", "POST", json, addNewListSuccess, addNewListFail)
+            })
         })
 }
 
+function addNewListSuccess() {
+    alert("success");
+}
 
+function addNewListFail() {}
 
 /**
  * Sends an AJAX request.

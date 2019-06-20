@@ -42,9 +42,8 @@ public class ShoppingListControllerJPA {
 
     @PostMapping("")
     @ResponseBody
-    public String addShoppingList(@RequestBody ShoppingListEntity shoppingList) {
+    public void addShoppingList(@RequestBody ShoppingListEntity shoppingList) {
         shoppingListServiceJPA.saveNew(shoppingList);
-        return "Successful";
     }
 
     @PostMapping("/add")
