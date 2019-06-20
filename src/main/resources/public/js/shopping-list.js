@@ -67,6 +67,7 @@ function loadLastListActGroup() {
         () => {
             let shoppingListElement = addWithClassToDOM("div", "shopping-list");
             let shoppingListJSON = (JSON.parse(event.target.response)).shoppingList;
+            shoppingListElement.dataset.id = shoppingListJSON.id;
 
             for (let i = 0; i < shoppingListJSON.lineItems.length; i++) {
                 addLineItem(shoppingListJSON.lineItems[i], shoppingListElement);
