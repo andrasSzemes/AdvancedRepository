@@ -24,7 +24,7 @@ public class ShoppingListEntity {
     @Column(columnDefinition = "boolean default false")
     private Boolean isArchived = false;
 
-    private Long memberId = -1L;
+    private Long memberId;
 
     @NotNull
     private Long groupId;

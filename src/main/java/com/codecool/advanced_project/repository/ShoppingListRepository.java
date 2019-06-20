@@ -17,4 +17,6 @@ public interface ShoppingListRepository extends JpaRepository<ShoppingListEntity
     void deleteAll();
 
     ShoppingListEntity findFirstByMemberIdEqualsOrderById(Long userID);
+
+    ShoppingListEntity findFirstByGroupIdOrderById(Long groupID);
 }

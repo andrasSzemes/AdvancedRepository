@@ -30,6 +30,7 @@ public class ShopControllerJPA {
 
     @PutMapping("/edit")
     public void updateShop(HttpServletResponse response, @RequestBody @Valid ShopEntity shopEntity) throws IOException {
+        //Todo: ask about why 500 when not found error
         if(shopServiceJPA.updateShop(shopEntity) == 0) response.sendError(500, "Shop not found");
     }
 
